@@ -31,7 +31,7 @@ const useGeoLocation = () => {
       () => {
         alert("위치 기반 미동의로 현재 위치가 반영되지 않습니다.");
       },
-      { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 },
+      { enableHighAccuracy: true, timeout: 0, maximumAge: 0 },
     );
   }, []);
 
