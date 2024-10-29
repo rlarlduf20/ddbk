@@ -3,19 +3,27 @@
 import Script from "next/script";
 import { useEffect } from "react";
 
+import { DEFAULT_ZOOM } from "../_constants";
+import useGeoLocation from "../_hooks/useGeoLocation";
+
 const MapContainer = () => {
+  const { curLocation } = useGeoLocation();
+
   useEffect(() => {
     const initMap = () => {
       const mapOptions = {
-        center: new naver.maps.LatLng(37.3595704, 127.105399),
-        zoom: 10,
+        center: new naver.maps.LatLng(
+          curLocation.latitude,
+          curLocation.longitude,
+        ),
+        zoom: DEFAULT_ZOOM,
       };
 
       new naver.maps.Map("map", mapOptions);
     };
 
     initMap();
-  }, []);
+  }, [curLocation]);
 
   return (
     <>
