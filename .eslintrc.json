@@ -29,6 +29,8 @@
     "@typescript-eslint/lines-between-class-members": "off",
     "@typescript-eslint/no-throw-literal": "off",
     "no-new": "off",
+    "import/no-extraneous-dependencies": "off",
+    "@typescript-eslint/no-use-before-define": "off",
     "import/extensions": [
       "error",
       "ignorePackages",
