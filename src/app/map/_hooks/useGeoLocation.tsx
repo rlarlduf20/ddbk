@@ -1,8 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
-import { DEFAULT_LATITUDE, DEFAULT_LONGITUDE } from "../_constants";
+import {
+  DEFAULT_LATITUDE,
+  DEFAULT_LONGITUDE,
+  DEFAULT_ZOOM,
+} from "../_constants";
 
 interface LocationType {
   latitude: number;
@@ -14,6 +18,7 @@ const useGeoLocation = () => {
     latitude: DEFAULT_LATITUDE,
     longitude: DEFAULT_LONGITUDE,
   });
+  const mapRef = useRef<naver.maps.Map | null>(null);
 
   useEffect(() => {
     const { geolocation } = navigator;
@@ -35,8 +40,26 @@ const useGeoLocation = () => {
     );
   }, []);
 
+  const handleScriptLoad = () => {
+    const mapOptions = {
+      center: new naver.maps.LatLng(location.latitude, location.longitude),
+      zoom: DEFAULT_ZOOM,
+    };
+    mapRef.current = new naver.maps.Map("map", mapOptions);
+  };
+
+  useEffect(() => {
+    if (!mapRef.current || typeof naver === "undefined") return;
+
+    const newCenter = new naver.maps.LatLng(
+      location.latitude,
+      location.longitude,
+    );
+    mapRef.current.setCenter(newCenter);
+  }, [location]);
+
   return {
-    curLocation: location,
+    handleScriptLoad,
   };
 };
 
