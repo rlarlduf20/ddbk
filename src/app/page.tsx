@@ -1,10 +1,10 @@
-import Button from "./_components/Button";
+import Link from "next/link";
 
 const MainPage = () => {
   return (
     <>
       <p>Welcome! Wooddk</p>
-      <Button>버튼</Button>
+      <Link href="/map">지도페이지</Link>
     </>
   );
 };
