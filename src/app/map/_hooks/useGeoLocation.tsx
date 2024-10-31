@@ -22,6 +22,7 @@ const useGeoLocation = () => {
 
   const mapRef = useRef<naver.maps.Map | null>(null);
   const watchIdRef = useRef<number | null>(null);
+  const polylineRef = useRef<naver.maps.Polyline | null>(null);
 
   useEffect(() => {
     const { geolocation } = navigator;
@@ -44,6 +45,18 @@ const useGeoLocation = () => {
 
   useEffect(() => {
     if (!mapRef.current || typeof naver === "undefined") return;
+    if (!polylineRef.current) return;
+
+    const currentPath: naver.maps.Point[] = [];
+    polylineRef.current.getPath().forEach((point) => {
+      currentPath.push(point);
+    });
+
+    const newPath = [
+      ...currentPath,
+      new naver.maps.LatLng(location.latitude, location.longitude), // 새 위치 추가
+    ];
+    polylineRef.current.setPath(newPath);
 
     const newCenter = new naver.maps.LatLng(
       location.latitude,
@@ -58,6 +71,13 @@ const useGeoLocation = () => {
       zoom: DEFAULT_ZOOM,
     };
     mapRef.current = new naver.maps.Map("map", mapOptions);
+
+    polylineRef.current = new naver.maps.Polyline({
+      map: mapRef.current,
+      path: [],
+      strokeColor: "#5347AA",
+      strokeWeight: 5,
+    });
   };
 
   const startTracking = () => {
