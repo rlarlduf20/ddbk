@@ -1,8 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
-import { DEFAULT_LATITUDE, DEFAULT_LONGITUDE } from "../_constants";
+import {
+  DEFAULT_LATITUDE,
+  DEFAULT_LONGITUDE,
+  DEFAULT_ZOOM,
+} from "../_constants";
 
 interface LocationType {
   latitude: number;
@@ -14,10 +18,13 @@ const useGeoLocation = () => {
     latitude: DEFAULT_LATITUDE,
     longitude: DEFAULT_LONGITUDE,
   });
+  const [isTracking, setIsTracking] = useState(false);
+
+  const mapRef = useRef<naver.maps.Map | null>(null);
+  const watchIdRef = useRef<number | null>(null);
 
   useEffect(() => {
     const { geolocation } = navigator;
-
     if (!geolocation) return;
 
     geolocation.getCurrentPosition(
@@ -35,8 +42,55 @@ const useGeoLocation = () => {
     );
   }, []);
 
+  useEffect(() => {
+    if (!mapRef.current || typeof naver === "undefined") return;
+
+    const newCenter = new naver.maps.LatLng(
+      location.latitude,
+      location.longitude,
+    );
+    mapRef.current.setCenter(newCenter);
+  }, [location]);
+
+  const handleScriptLoad = () => {
+    const mapOptions = {
+      center: new naver.maps.LatLng(location.latitude, location.longitude),
+      zoom: DEFAULT_ZOOM,
+    };
+    mapRef.current = new naver.maps.Map("map", mapOptions);
+  };
+
+  const startTracking = () => {
+    const { geolocation } = navigator;
+    if (geolocation && !watchIdRef.current) {
+      watchIdRef.current = geolocation.watchPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          setLocation({ latitude, longitude });
+        },
+        () => {
+          alert("위치 기반 동의가 되어있지 않습니다.");
+        },
+        { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 },
+      );
+      setIsTracking(true);
+    }
+  };
+
+  const stopTracking = () => {
+    if (watchIdRef.current !== null) {
+      navigator.geolocation.clearWatch(watchIdRef.current);
+      watchIdRef.current = null;
+      setIsTracking(false);
+    }
+  };
+
   return {
-    curLocation: location,
+    handleScriptLoad,
+    startTracking,
+    stopTracking,
+    isTracking,
+    location,
   };
 };
 
