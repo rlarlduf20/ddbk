@@ -3,6 +3,7 @@
 import Script from "next/script";
 
 import useGeoLocation from "../_hooks/useGeoLocation";
+import useWebView from "../_hooks/useWebview";
 
 const MapContainer = () => {
   const {
@@ -13,6 +14,8 @@ const MapContainer = () => {
     location,
   } = useGeoLocation();
 
+  const { isWebView } = useWebView();
+
   return (
     <>
       <Script
@@ -21,16 +24,20 @@ const MapContainer = () => {
         onLoad={handleScriptLoad}
       />
       <div id="map" style={{ width: "100vw", height: "50vh" }} />
-      <button
-        type="button"
-        onClick={isTracking ? stopTracking : startTracking}
-        style={{ margin: "20px" }}
-      >
-        {isTracking ? "Stop Tracking" : "Start Tracking"}
-      </button>
-      <p>
-        {location.latitude}, {location.longitude}
-      </p>
+      {isWebView && (
+        <>
+          <button
+            type="button"
+            onClick={isTracking ? stopTracking : startTracking}
+            style={{ margin: "20px" }}
+          >
+            {isTracking ? "Stop Tracking" : "Start Tracking"}
+          </button>
+          <p>
+            {location.latitude}, {location.longitude}
+          </p>
+        </>
+      )}
     </>
   );
 };
