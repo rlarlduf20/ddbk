@@ -2,8 +2,8 @@
 
 import Script from "next/script";
 
+import useIsWebView from "../../_hooks/useIsWebView";
 import useGeoLocation from "../_hooks/useGeoLocation";
-import useIsWebView from "../_hooks/useIsWebView";
 
 const MapContainer = () => {
   const {
