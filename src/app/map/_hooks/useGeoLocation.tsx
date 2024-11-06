@@ -25,6 +25,13 @@ const useGeoLocation = () => {
   const polylineRef = useRef<naver.maps.Polyline | null>(null);
 
   useEffect(() => {
+    if (typeof window !== "undefined" && window.ReactNativeWebView) {
+      alert("웹뷰입니다!!");
+      // 웹뷰에서 위치정보 동의 받고 현재 위치받아오기
+      return;
+    }
+    alert("웹페이지입니다!!");
+
     const { geolocation } = navigator;
     if (!geolocation) return;
 
