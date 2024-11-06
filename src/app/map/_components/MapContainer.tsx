@@ -3,7 +3,7 @@
 import Script from "next/script";
 
 import useGeoLocation from "../_hooks/useGeoLocation";
-import useWebView from "../_hooks/useWebview";
+import useIsWebView from "../_hooks/useIsWebView";
 
 const MapContainer = () => {
   const {
@@ -14,7 +14,7 @@ const MapContainer = () => {
     location,
   } = useGeoLocation();
 
-  const { isWebView } = useWebView();
+  const { isWebView } = useIsWebView();
 
   return (
     <>
