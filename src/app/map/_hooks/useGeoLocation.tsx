@@ -35,6 +35,8 @@ const useGeoLocation = () => {
         JSON.stringify({ type: "REQUEST_GPS_PERMISSIONS" }),
       );
       window.addEventListener("message", handleMessage);
+      // android 추후에 확인
+      // document.addEventListener("message", handleMessage);
     } else {
       const { geolocation } = navigator;
       if (geolocation) {
@@ -57,6 +59,8 @@ const useGeoLocation = () => {
     return () => {
       if (typeof window !== "undefined" && window.ReactNativeWebView) {
         window.removeEventListener("message", handleMessage);
+        // android 추후에 확인
+        // document.removeEventListener("message", handleMessage);
       }
     };
   }, []);
