@@ -25,32 +25,40 @@ const useGeoLocation = () => {
   const polylineRef = useRef<naver.maps.Polyline | null>(null);
 
   useEffect(() => {
+    const handleMessage = (event: any) => {
+      const data = JSON.parse(event.data);
+      setLocation({ latitude: data.latitude, longitude: data.longitude });
+    };
+
     if (typeof window !== "undefined" && window.ReactNativeWebView) {
-      alert("웹뷰입니다!!");
-      // 웹뷰에서 위치정보 동의 받고 현재 위치받아오기
       window.ReactNativeWebView.postMessage(
         JSON.stringify({ type: "REQUEST_GPS_PERMISSIONS" }),
       );
-      return;
+      window.addEventListener("message", handleMessage);
+    } else {
+      const { geolocation } = navigator;
+      if (geolocation) {
+        geolocation.getCurrentPosition(
+          (position) => {
+            const { latitude, longitude } = position.coords;
+            setLocation({
+              latitude,
+              longitude,
+            });
+          },
+          () => {
+            alert("위치 기반 미동의로 현재 위치가 반영되지 않습니다.");
+          },
+          { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 },
+        );
+      }
     }
-    alert("웹페이지입니다!!");
 
-    const { geolocation } = navigator;
-    if (!geolocation) return;
-
-    geolocation.getCurrentPosition(
-      (position) => {
-        const { latitude, longitude } = position.coords;
-        setLocation({
-          latitude,
-          longitude,
-        });
-      },
-      () => {
-        alert("위치 기반 미동의로 현재 위치가 반영되지 않습니다.");
-      },
-      { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 },
-    );
+    return () => {
+      if (typeof window !== "undefined" && window.ReactNativeWebView) {
+        window.removeEventListener("message", handleMessage);
+      }
+    };
   }, []);
 
   useEffect(() => {
