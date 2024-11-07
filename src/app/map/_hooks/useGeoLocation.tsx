@@ -28,6 +28,9 @@ const useGeoLocation = () => {
     if (typeof window !== "undefined" && window.ReactNativeWebView) {
       alert("웹뷰입니다!!");
       // 웹뷰에서 위치정보 동의 받고 현재 위치받아오기
+      window.ReactNativeWebView.postMessage(
+        JSON.stringify({ type: "REQUEST_GPS_PERMISSIONS" }),
+      );
       return;
     }
     alert("웹페이지입니다!!");
