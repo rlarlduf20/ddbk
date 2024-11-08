@@ -19,7 +19,6 @@ const MapContainer = () => {
         onLoad={handleScriptLoad}
       />
       <div id="map" style={{ width: "100vw", height: "100vh" }} />
-
       <button
         type="button"
         onClick={handleClickStartBtn}
