@@ -1,15 +1,20 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import Script from "next/script";
 
 import useGeoLocation from "../_hooks/useGeoLocation";
 
 const MapContainer = () => {
   const { handleScriptLoad } = useGeoLocation();
-  const router = useRouter();
+
   const handleClickStartBtn = () => {
-    router.push("/");
+    if (typeof window !== "undefined" && window.ReactNativeWebView) {
+      window.ReactNativeWebView.postMessage(
+        JSON.stringify({ type: "STACK_TRACKING" }),
+      );
+      return;
+    }
+    alert("산책 시작은 앱에서 사용할 수 있습니다.");
   };
   return (
     <>
