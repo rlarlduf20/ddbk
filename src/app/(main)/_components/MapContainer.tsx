@@ -9,11 +9,7 @@ const MapContainer = () => {
   const { handleScriptLoad } = useGeoLocation();
   const router = useRouter();
   const handleClickStartBtn = () => {
-    if (typeof window !== "undefined" && window.ReactNativeWebView) {
-      router.push("/hu");
-      return;
-    }
-    alert("산책 루트 생성 기능은 모바일에서 이용할 수 있습니다.");
+    router.push("/");
   };
   return (
     <>
@@ -27,7 +23,17 @@ const MapContainer = () => {
       <button
         type="button"
         onClick={handleClickStartBtn}
-        style={{ margin: "20px" }}
+        style={{
+          margin: "20px",
+          position: "fixed",
+          left: 50,
+          top: 50,
+          zIndex: 1000,
+          backgroundColor: "white",
+          padding: "10px 20px",
+          borderRadius: "5px",
+          boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.2)",
+        }}
       >
         산책 시작
       </button>
