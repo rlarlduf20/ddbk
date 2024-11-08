@@ -6,13 +6,8 @@ import useIsWebView from "../../_hooks/useIsWebView";
 import useGeoLocation from "../_hooks/useGeoLocation";
 
 const MapContainer = () => {
-  const {
-    handleScriptLoad,
-    startTracking,
-    stopTracking,
-    isTracking,
-    location,
-  } = useGeoLocation();
+  const { handleScriptLoad, startTracking, stopTracking, location } =
+    useGeoLocation();
 
   const { isWebView } = useIsWebView();
 
@@ -28,10 +23,17 @@ const MapContainer = () => {
         <>
           <button
             type="button"
-            onClick={isTracking ? stopTracking : startTracking}
+            onClick={startTracking}
             style={{ margin: "20px" }}
           >
-            {isTracking ? "Stop Tracking" : "Start Tracking"}
+            시작
+          </button>
+          <button
+            type="button"
+            onClick={stopTracking}
+            style={{ margin: "20px" }}
+          >
+            끝
           </button>
           <p>
             {location.latitude}, {location.longitude}

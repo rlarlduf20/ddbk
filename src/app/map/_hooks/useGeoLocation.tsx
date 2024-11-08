@@ -18,10 +18,8 @@ const useGeoLocation = () => {
     latitude: DEFAULT_LATITUDE,
     longitude: DEFAULT_LONGITUDE,
   });
-  const [isTracking, setIsTracking] = useState(false);
 
   const mapRef = useRef<naver.maps.Map | null>(null);
-  const watchIdRef = useRef<number | null>(null);
   const polylineRef = useRef<naver.maps.Polyline | null>(null);
 
   useEffect(() => {
@@ -103,27 +101,18 @@ const useGeoLocation = () => {
   };
 
   const startTracking = () => {
-    const { geolocation } = navigator;
-    if (geolocation && !watchIdRef.current) {
-      watchIdRef.current = geolocation.watchPosition(
-        (position) => {
-          const { latitude, longitude } = position.coords;
-          setLocation({ latitude, longitude });
-        },
-        () => {
-          alert("위치 기반 동의가 되어있지 않습니다.");
-        },
-        { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 },
+    if (typeof window !== "undefined" && window.ReactNativeWebView) {
+      window.ReactNativeWebView.postMessage(
+        JSON.stringify({ type: "START_TRACKING" }),
       );
-      setIsTracking(true);
     }
   };
 
   const stopTracking = () => {
-    if (watchIdRef.current !== null) {
-      navigator.geolocation.clearWatch(watchIdRef.current);
-      watchIdRef.current = null;
-      setIsTracking(false);
+    if (typeof window !== "undefined" && window.ReactNativeWebView) {
+      window.ReactNativeWebView.postMessage(
+        JSON.stringify({ type: "STOP_TRACKING" }),
+      );
     }
   };
 
@@ -131,7 +120,6 @@ const useGeoLocation = () => {
     handleScriptLoad,
     startTracking,
     stopTracking,
-    isTracking,
     location,
   };
 };
