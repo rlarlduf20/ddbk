@@ -1,6 +1,9 @@
 "use client";
 
 import Script from "next/script";
+import { useEffect } from "react";
+
+import { startTracking, stopTracking } from "../_lib/tracking";
 
 import useGeoLocation from "@/app/_hooks/useGeolocation";
 import useMap from "@/app/_hooks/useMap";
@@ -10,14 +13,20 @@ const MapContainer = () => {
   const { handleScriptLoad } = useMap({ location });
 
   const handleClickFinishBtn = () => {
+    stopTracking();
     if (typeof window !== "undefined" && window.ReactNativeWebView) {
       window.ReactNativeWebView.postMessage(
         JSON.stringify({ type: "STACK_REVIEW" }),
       );
+
       return;
     }
     alert("산책 끝은 앱에서 사용할 수 있습니다.");
   };
+
+  useEffect(() => {
+    startTracking();
+  }, []);
 
   return (
     <>

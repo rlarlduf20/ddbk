@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+
 import { DEFAULT_ZOOM } from "../(main)/_constants";
 
 interface Props {
