@@ -9,15 +9,16 @@ const MapContainer = () => {
   const { location } = useGeoLocation();
   const { handleScriptLoad } = useMap({ location });
 
-  const handleClickStartBtn = () => {
+  const handleClickFinishBtn = () => {
     if (typeof window !== "undefined" && window.ReactNativeWebView) {
       window.ReactNativeWebView.postMessage(
-        JSON.stringify({ type: "STACK_TRACKING" }),
+        JSON.stringify({ type: "STACK_REVIEW" }),
       );
       return;
     }
-    alert("산책 시작은 앱에서 사용할 수 있습니다.");
+    alert("산책 끝은 앱에서 사용할 수 있습니다.");
   };
+
   return (
     <>
       <Script
@@ -28,7 +29,7 @@ const MapContainer = () => {
       <div id="map" style={{ width: "100vw", height: "100vh" }} />
       <button
         type="button"
-        onClick={handleClickStartBtn}
+        onClick={handleClickFinishBtn}
         style={{
           margin: "20px",
           position: "fixed",
@@ -41,7 +42,7 @@ const MapContainer = () => {
           boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.2)",
         }}
       >
-        산책 시작
+        산책 끝
       </button>
     </>
   );
