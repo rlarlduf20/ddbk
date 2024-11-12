@@ -5,9 +5,9 @@ import { useEffect } from "react";
 
 import { startTracking, stopTracking } from "../_lib/tracking";
 
+import Loading from "@/app/_components/Loading";
 import useGeoLocation from "@/app/_hooks/useGeolocation";
 import useMap from "@/app/_hooks/useMap";
-import Loading from "@/app/_components/Loading";
 
 const MapContainer = () => {
   const { isLoading, location } = useGeoLocation();
