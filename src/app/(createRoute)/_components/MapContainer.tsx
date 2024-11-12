@@ -7,9 +7,10 @@ import { startTracking, stopTracking } from "../_lib/tracking";
 
 import useGeoLocation from "@/app/_hooks/useGeolocation";
 import useMap from "@/app/_hooks/useMap";
+import Loading from "@/app/_components/Loading";
 
 const MapContainer = () => {
-  const { location } = useGeoLocation();
+  const { isLoading, location } = useGeoLocation();
   const { handleScriptLoad } = useMap({ location });
 
   const handleClickFinishBtn = () => {
@@ -35,6 +36,7 @@ const MapContainer = () => {
         src={`https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${process.env.NEXT_PUBLIC_NAVER_MAP_CLIENT_ID}`}
         onLoad={handleScriptLoad}
       />
+      {isLoading && <Loading />}
       <div id="map" style={{ width: "100vw", height: "100vh" }} />
       <button
         type="button"
