@@ -1,7 +1,7 @@
 import MapContainer from "./_components/MapContainer";
 
-const MapPage = () => {
+const MainPage = () => {
   return <MapContainer />;
 };
 
-export default MapPage;
+export default MainPage;
