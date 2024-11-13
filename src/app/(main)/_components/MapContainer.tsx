@@ -7,11 +7,26 @@ import useGeoLocation from "@/app/_hooks/useGeolocation";
 import useMap from "@/app/_hooks/useMap";
 
 const MapContainer = () => {
-  const { location, isLoading } = useGeoLocation();
+  const {
+    location,
+    isLoading,
+    isPossibleLocationService,
+    isPossiblePermissions,
+  } = useGeoLocation();
   const { handleScriptLoad } = useMap({ location });
 
   const handleClickStartBtn = () => {
     if (typeof window !== "undefined" && window.ReactNativeWebView) {
+      window.ReactNativeWebView.postMessage(
+        JSON.stringify({ type: "GPS_PERMISSION_STATE" }),
+      );
+
+      if (!isPossibleLocationService || !isPossiblePermissions) {
+        window.ReactNativeWebView.postMessage(
+          JSON.stringify({ type: "REQUEST_GPS_PERMISSIONS" }),
+        );
+        return;
+      }
       window.ReactNativeWebView.postMessage(
         JSON.stringify({ type: "STACK_TRACKING" }),
       );
