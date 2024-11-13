@@ -15,22 +15,12 @@ const useGeoLocation = () => {
     latitude: DEFAULT_LATITUDE,
     longitude: DEFAULT_LONGITUDE,
   });
-  const [isPossibleLocationService, setIsPossibleLocationService] =
-    useState<boolean>(false);
-  const [isPossiblePermissions, setIsPossiblePermissions] =
-    useState<boolean>(false);
 
   useEffect(() => {
     const handleMessage = (event: any) => {
       const data = JSON.parse(event.data);
       if (data.latitude && data.longitude) {
         setLocation({ latitude: data.latitude, longitude: data.longitude });
-      }
-      if (data.isLocationService) {
-        setIsPossibleLocationService(true);
-      }
-      if (data.isPermissions) {
-        setIsPossiblePermissions(true);
       }
 
       setIsLoading(false);
@@ -75,8 +65,6 @@ const useGeoLocation = () => {
 
   return {
     isLoading,
-    isPossibleLocationService,
-    isPossiblePermissions,
     location,
   };
 };
