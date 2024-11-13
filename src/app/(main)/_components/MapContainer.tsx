@@ -2,11 +2,12 @@
 
 import Script from "next/script";
 
+import Loading from "@/app/_components/Loading";
 import useGeoLocation from "@/app/_hooks/useGeolocation";
 import useMap from "@/app/_hooks/useMap";
 
 const MapContainer = () => {
-  const { location } = useGeoLocation();
+  const { location, isLoading } = useGeoLocation();
   const { handleScriptLoad } = useMap({ location });
 
   const handleClickStartBtn = () => {
@@ -25,6 +26,7 @@ const MapContainer = () => {
         src={`https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${process.env.NEXT_PUBLIC_NAVER_MAP_CLIENT_ID}`}
         onLoad={handleScriptLoad}
       />
+      {isLoading && <Loading />}
       <div id="map" style={{ width: "100vw", height: "100vh" }} />
       <button
         type="button"

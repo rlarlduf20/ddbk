@@ -10,6 +10,7 @@ interface LocationType {
 }
 
 const useGeoLocation = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [location, setLocation] = useState<LocationType>({
     latitude: DEFAULT_LATITUDE,
     longitude: DEFAULT_LONGITUDE,
@@ -19,6 +20,7 @@ const useGeoLocation = () => {
     const handleMessage = (event: any) => {
       const data = JSON.parse(event.data);
       setLocation({ latitude: data.latitude, longitude: data.longitude });
+      setIsLoading(false);
     };
 
     if (typeof window !== "undefined" && window.ReactNativeWebView) {
@@ -38,9 +40,11 @@ const useGeoLocation = () => {
               latitude,
               longitude,
             });
+            setIsLoading(false);
           },
           () => {
             alert("위치 기반 미동의로 현재 위치가 반영되지 않습니다.");
+            setIsLoading(false);
           },
           { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 },
         );
@@ -57,6 +61,7 @@ const useGeoLocation = () => {
   }, []);
 
   return {
+    isLoading,
     location,
   };
 };
