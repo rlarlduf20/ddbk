@@ -19,7 +19,10 @@ const useGeoLocation = () => {
   useEffect(() => {
     const handleMessage = (event: any) => {
       const data = JSON.parse(event.data);
-      setLocation({ latitude: data.latitude, longitude: data.longitude });
+      if (data.latitude && data.longitude) {
+        setLocation({ latitude: data.latitude, longitude: data.longitude });
+      }
+
       setIsLoading(false);
     };
 
