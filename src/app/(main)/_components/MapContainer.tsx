@@ -5,14 +5,12 @@ import Script from "next/script";
 import Loading from "@/app/_components/Loading";
 import useGeoLocation from "@/app/_hooks/useGeolocation";
 import useMap from "@/app/_hooks/useMap";
+import usePermissionState from "@/app/_hooks/usePermissionState";
 
 const MapContainer = () => {
-  const {
-    location,
-    isLoading,
-    isPossibleLocationService,
-    isPossiblePermissions,
-  } = useGeoLocation();
+  const { location, isLoading } = useGeoLocation();
+  const { isPossibleLocationService, isPossiblePermissions } =
+    usePermissionState();
   const { handleScriptLoad } = useMap({ location });
 
   const handleClickStartBtn = () => {
