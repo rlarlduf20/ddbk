@@ -45,6 +45,10 @@ const useMap = ({ location }: Props) => {
     ];
     polylineRef.current.setPath(newPath);
 
+    curPosMarkerRef.current?.setPosition(
+      new naver.maps.LatLng(location.latitude, location.longitude),
+    );
+
     const newCenter = new naver.maps.LatLng(
       location.latitude,
       location.longitude,
