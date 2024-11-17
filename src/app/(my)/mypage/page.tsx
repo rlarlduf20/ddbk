@@ -42,7 +42,9 @@ const MyPage = () => {
       <Typography.PLarge>오뚜~~ HI</Typography.PLarge>
       <Typography.PMedium>오뚜~~ HI</Typography.PMedium>
       <Typography.PSmall>오뚜~~ HI</Typography.PSmall>
-      <Button rounded>버튼</Button>
+      <Button rounded visual="outline">
+        버튼
+      </Button>
     </div>
   );
 };
