@@ -1,5 +1,6 @@
 "use client";
 
+import Button from "@/app/_components/Button";
 import Typography from "@/app/_components/Typography";
 import usePermissionState from "@/app/_hooks/usePermissionState";
 
@@ -41,6 +42,7 @@ const MyPage = () => {
       <Typography.PLarge>오뚜~~ HI</Typography.PLarge>
       <Typography.PMedium>오뚜~~ HI</Typography.PMedium>
       <Typography.PSmall>오뚜~~ HI</Typography.PSmall>
+      <Button rounded>버튼</Button>
     </div>
   );
 };
