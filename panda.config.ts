@@ -6,4 +6,14 @@ export default defineConfig({
   include: ["./src/**/*.{js,jsx,ts,tsx}", "./pages/**/*.{js,jsx,ts,tsx}"],
   exclude: [],
   outdir: "styled-system",
+  theme: {
+    extend: {
+      tokens: {
+        colors: {
+          main_pink: { value: "#ED737E" },
+          main_green: { value: "#42B378" },
+        },
+      },
+    },
+  },
 });
