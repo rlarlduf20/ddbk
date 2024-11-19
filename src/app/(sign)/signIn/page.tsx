@@ -13,11 +13,11 @@ const signContainerStyles = css({
 
 const SignIn = () => {
   return (
-    <button type="button" onClick={() => logIn("kakao")}>
-      <div className={signContainerStyles}>
-        <button type="button">카카오 로그인</button>
-      </div>
-    </button>
+    <div className={signContainerStyles}>
+      <button type="button" onClick={() => logIn("kakao")}>
+        카카오 로그인
+      </button>
+    </div>
   );
 };
 
