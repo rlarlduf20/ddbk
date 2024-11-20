@@ -1,10 +1,14 @@
 "use client";
 
-import Button from "@/app/_components/Button";
+import { useSession } from "next-auth/react";
+
+import { logOut } from "@/app/_actions/auth";
 import Typography from "@/app/_components/Typography";
 import usePermissionState from "@/app/_hooks/usePermissionState";
 
 const MyPage = () => {
+  const session = useSession();
+
   const { isPossibleLocationService, isPossiblePermissions } =
     usePermissionState();
 
@@ -42,9 +46,11 @@ const MyPage = () => {
       <Typography.PLarge>오뚜~~ HI</Typography.PLarge>
       <Typography.PMedium>오뚜~~ HI</Typography.PMedium>
       <Typography.PSmall>오뚜~~ HI</Typography.PSmall>
-      <Button rounded visual="outline">
+      {session.data?.user?.name}
+
+      <button type="button" onClick={logOut}>
         버튼
-      </Button>
+      </button>
     </div>
   );
 };
