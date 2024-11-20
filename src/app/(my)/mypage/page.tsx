@@ -1,6 +1,6 @@
 "use client";
 
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 
 import { logOut } from "@/app/_actions/auth";
 import Typography from "@/app/_components/Typography";
@@ -18,6 +18,17 @@ const MyPage = () => {
         JSON.stringify({ type: "REQUEST_GPS_PERMISSIONS" }),
       );
     }
+  };
+
+  const handleLogOut = async () => {
+    if (typeof window !== "undefined" && window.ReactNativeWebView) {
+      await signOut();
+      window.ReactNativeWebView.postMessage(
+        JSON.stringify({ type: "LOG_OUT" }),
+      );
+      return;
+    }
+    logOut();
   };
   return (
     <div style={{ paddingTop: "100px" }}>
@@ -48,7 +59,7 @@ const MyPage = () => {
       <Typography.PSmall>오뚜~~ HI</Typography.PSmall>
       {session.data?.user?.name}
 
-      <button type="button" onClick={logOut}>
+      <button type="button" onClick={handleLogOut}>
         버튼
       </button>
     </div>
