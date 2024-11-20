@@ -46,7 +46,7 @@ const MyPage = () => {
       <Typography.PLarge>오뚜~~ HI</Typography.PLarge>
       <Typography.PMedium>오뚜~~ HI</Typography.PMedium>
       <Typography.PSmall>오뚜~~ HI</Typography.PSmall>
-      {session.data?.expires}
+      {session.data?.user?.name}
 
       <button type="button" onClick={logOut}>
         버튼

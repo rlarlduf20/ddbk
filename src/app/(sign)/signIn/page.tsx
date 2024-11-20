@@ -1,5 +1,7 @@
 "use client";
 
+import { signIn } from "next-auth/react";
+
 import { css } from "../../../../styled-system/css";
 
 import { logIn } from "@/app/_actions/auth";
@@ -12,9 +14,21 @@ const signContainerStyles = css({
 });
 
 const SignIn = () => {
+  const handleLogin = async () => {
+    if (window !== undefined && window.ReactNativeWebView) {
+      await signIn("kakao");
+      window.ReactNativeWebView.postMessage(
+        JSON.stringify({ type: "LOGIN_SUCCESS" }),
+      );
+
+      return;
+    }
+    logIn("kakao");
+  };
+
   return (
     <div className={signContainerStyles}>
-      <button type="button" onClick={() => logIn("kakao")}>
+      <button type="button" onClick={handleLogin}>
         카카오 로그인
       </button>
     </div>
