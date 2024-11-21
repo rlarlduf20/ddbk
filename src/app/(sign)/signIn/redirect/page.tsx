@@ -15,7 +15,14 @@ const SignInRedirectPage = () => {
         );
       }
     };
-    checkLogin();
+
+    const timer = setInterval(() => {
+      checkLogin();
+    }, 3000);
+
+    return () => {
+      clearInterval(timer);
+    };
   }, []);
 
   return <p style={{ padding: "100px" }}>로그인중입니다.....</p>;
