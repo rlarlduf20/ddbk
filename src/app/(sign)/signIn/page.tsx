@@ -18,10 +18,6 @@ const SignIn = () => {
     if (window !== undefined && window.ReactNativeWebView) {
       await signIn("kakao", { redirectTo: "/signIn/redirect" });
 
-      window.ReactNativeWebView.postMessage(
-        JSON.stringify({ type: "LOGIN_SUCCESS" }),
-      );
-
       return;
     }
     logIn("kakao");
