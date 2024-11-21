@@ -8,7 +8,12 @@ const SignInRedirectPage = () => {
   useEffect(() => {
     const checkLogin = async () => {
       const session = await auth();
-
+      window.ReactNativeWebView.postMessage(
+        JSON.stringify({
+          type: "CHECK_SESSION",
+          user_id: session?.user && session?.user.id,
+        }),
+      );
       if (session) {
         window.ReactNativeWebView.postMessage(
           JSON.stringify({ type: "LOGIN_SUCCESS" }),
