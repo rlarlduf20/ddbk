@@ -16,7 +16,8 @@ const signContainerStyles = css({
 const SignIn = () => {
   const handleLogin = async () => {
     if (window !== undefined && window.ReactNativeWebView) {
-      await signIn("kakao");
+      await signIn("kakao", { redirect: false });
+
       window.ReactNativeWebView.postMessage(
         JSON.stringify({ type: "LOGIN_SUCCESS" }),
       );
