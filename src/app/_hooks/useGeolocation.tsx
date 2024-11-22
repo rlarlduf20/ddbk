@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-import { DEFAULT_LATITUDE, DEFAULT_LONGITUDE } from "../_constants";
+import { DEFAULT_LATITUDE, DEFAULT_LONGITUDE } from "../_constants/map";
 
 interface LocationType {
   latitude: number;

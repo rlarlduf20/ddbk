@@ -5,7 +5,7 @@ import NavBar from "../_components/NavBar";
 
 import { auth } from "@/auth";
 
-export default async function RootLayout({
+export default async function FootPrintCollectionLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;

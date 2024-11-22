@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 
-import { DEFAULT_ZOOM } from "../(main)/_constants";
+import { DEFAULT_ZOOM } from "../_constants/map";
 
 interface Props {
   location: { latitude: number; longitude: number };
