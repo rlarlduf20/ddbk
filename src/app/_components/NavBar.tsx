@@ -2,32 +2,26 @@
 
 import Link from "next/link";
 
-import { css } from "../../../styled-system/css";
+import { hstack } from "../../../styled-system/patterns";
 import { NAVIGATION_LIST } from "../_constants/navigation";
-import useIsWebView from "../_hooks/useIsWebView";
 
-const navbarStyles = css({
+const navbarStyles = hstack({
   position: "fixed",
   left: "50%",
   transform: "translate(-50%, 0)",
-  bottom: 100,
+  bottom: { base: 0, md: 100 },
   zIndex: 1000,
   bgColor: "white",
   height: "60px",
-  width: "530px",
-  border: "1px solid black",
-  borderRadius: "20px",
-  display: "flex",
+  width: { base: "100vw", md: "70vw", lg: "768px" },
+  border: { base: "none", md: "1px solid black" },
+  borderRadius: { base: 0, md: "20px" },
   alignItems: "center",
   justifyContent: "space-between",
   px: "20px",
 });
 
 const NavBar = () => {
-  const { isWebView } = useIsWebView();
-
-  if (isWebView) return null;
-
   return (
     <nav className={navbarStyles}>
       {NAVIGATION_LIST.map((item) => (
