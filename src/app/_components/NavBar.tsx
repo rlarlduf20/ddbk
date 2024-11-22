@@ -1,7 +1,10 @@
+"use client";
+
 import Link from "next/link";
 
 import { css } from "../../../styled-system/css";
 import { NAVIGATION_LIST } from "../_constants/navigation";
+import useIsWebView from "../_hooks/useIsWebView";
 
 const navbarStyles = css({
   position: "fixed",
@@ -21,6 +24,10 @@ const navbarStyles = css({
 });
 
 const NavBar = () => {
+  const { isWebView } = useIsWebView();
+
+  if (isWebView) return null;
+
   return (
     <nav className={navbarStyles}>
       {NAVIGATION_LIST.map((item) => (
