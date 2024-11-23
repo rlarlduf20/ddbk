@@ -47,8 +47,8 @@ const MapContainer = () => {
         style={{
           margin: "20px",
           position: "fixed",
-          left: 50,
-          top: 50,
+          right: 50,
+          bottom: 300,
           zIndex: 1000,
           backgroundColor: "white",
           padding: "10px 20px",
