@@ -7,12 +7,12 @@ import Typography from "@/app/_components/Typography";
 import { auth } from "@/auth";
 
 const profileCardStyles = hstack({
-  width: "562.5px",
+  width: { base: "100vw", sm: "562.5px" },
   height: "165px",
   position: "fixed",
   zIndex: 2,
   top: 0,
-  left: "30px",
+  left: { base: 0, sm: "30px" },
   bgColor: "#FFF",
   boxShadow: "0px 6px 6px 0px rgba(0, 0, 0, 0.1)",
   borderRadius: "0px 0px 15px 15px",
