@@ -1,13 +1,8 @@
 "use client";
 
-import { signOut, useSession } from "next-auth/react";
-
-import { logOut } from "@/app/_actions/auth";
 import usePermissionState from "@/app/_hooks/usePermissionState";
 
 const GPSGroup = () => {
-  const session = useSession();
-
   const { isPossibleLocationService, isPossiblePermissions } =
     usePermissionState();
 
@@ -19,16 +14,6 @@ const GPSGroup = () => {
     }
   };
 
-  const handleLogOut = async () => {
-    if (typeof window !== "undefined" && window.ReactNativeWebView) {
-      await signOut();
-      window.ReactNativeWebView.postMessage(
-        JSON.stringify({ type: "LOG_OUT" }),
-      );
-      return;
-    }
-    logOut();
-  };
   return (
     <div>
       <button
@@ -47,12 +32,6 @@ const GPSGroup = () => {
         {`앱 위치 권한 허용 : `}
         {isPossiblePermissions ? "켜짐" : "꺼짐"}
       </button>
-      <div>
-        {session.data?.user?.name}
-        <button type="button" onClick={handleLogOut}>
-          버튼
-        </button>
-      </div>
     </div>
   );
 };

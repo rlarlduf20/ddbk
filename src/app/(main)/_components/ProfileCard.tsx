@@ -48,6 +48,7 @@ const ProfileCard = async () => {
         <div className={profileImgStyles} />
         <Typography.PMedium>{session.user?.name}</Typography.PMedium>
       </div>
+      <Link href="/setting">설정</Link>
     </div>
   );
 };
