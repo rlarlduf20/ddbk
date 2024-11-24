@@ -1,6 +1,18 @@
 "use client";
 
+import { css } from "../../../../styled-system/css";
+import { hstack } from "../../../../styled-system/patterns";
+
+import Typography from "@/app/_components/Typography";
 import usePermissionState from "@/app/_hooks/usePermissionState";
+
+const GPSGroupStyles = css({
+  mb: "200px",
+});
+
+const GPSBoxStyles = hstack({
+  justify: "space-between",
+});
 
 const GPSGroup = () => {
   const { isPossibleLocationService, isPossiblePermissions } =
@@ -15,23 +27,19 @@ const GPSGroup = () => {
   };
 
   return (
-    <div>
-      <button
-        type="button"
-        style={{ border: "1pxSolidBlack", padding: "5px" }}
-        onClick={handlePermission}
-      >
-        {`디바이스 위치서비스 : `}
-        {isPossibleLocationService ? "켜짐" : "꺼짐"}
-      </button>
-      <button
-        type="button"
-        style={{ borderBottom: "1pxSolidBlack", padding: "5px" }}
-        onClick={handlePermission}
-      >
-        {`앱 위치 권한 허용 : `}
-        {isPossiblePermissions ? "켜짐" : "꺼짐"}
-      </button>
+    <div className={GPSGroupStyles}>
+      <div className={GPSBoxStyles}>
+        <Typography.PMedium>디바이스 위치서비스 :</Typography.PMedium>
+        <button type="button" onClick={handlePermission}>
+          {isPossibleLocationService ? "켜짐" : "꺼짐"}
+        </button>
+      </div>
+      <div className={GPSBoxStyles}>
+        <Typography.PMedium>앱 위치 권한 허용 :</Typography.PMedium>
+        <button type="button" onClick={handlePermission}>
+          {isPossiblePermissions ? "켜짐" : "꺼짐"}
+        </button>
+      </div>
     </div>
   );
 };

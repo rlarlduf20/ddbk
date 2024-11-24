@@ -1,12 +1,10 @@
 "use client";
 
-import { signOut, useSession } from "next-auth/react";
+import { signOut } from "next-auth/react";
 
 import { logOut } from "@/app/_actions/auth";
 
 const SignOutButton = () => {
-  const session = useSession();
-
   const handleLogOut = async () => {
     if (typeof window !== "undefined" && window.ReactNativeWebView) {
       await signOut();
@@ -20,9 +18,8 @@ const SignOutButton = () => {
 
   return (
     <div>
-      {session.data?.user?.name}
       <button type="button" onClick={handleLogOut}>
-        버튼
+        로그아웃
       </button>
     </div>
   );
