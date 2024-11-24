@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+
 import { css } from "../../../../../styled-system/css";
 import { vstack } from "../../../../../styled-system/patterns";
 
@@ -28,6 +30,20 @@ const inputStyles = css({
 });
 
 const EditNickNamePage = () => {
+  const [nickname, setNickname] = useState<string>("");
+
+  const handleChangeNickname = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setNickname(e.target.value);
+  };
+  const handleSubmitNickname = async () => {
+    await fetch("/api/user/edit-nickname", {
+      method: "POST",
+      body: JSON.stringify({
+        newNickname: nickname,
+      }),
+    });
+  };
+
   return (
     <div className={settingStyles}>
       <section className={settingSectionStyles}>
@@ -38,9 +54,13 @@ const EditNickNamePage = () => {
               id="nickname"
               placeholder="닉네임을 입력해주세요."
               className={inputStyles}
+              value={nickname}
+              onChange={handleChangeNickname}
             />
           </label>
-          <button type="button">확인</button>
+          <button type="button" onClick={handleSubmitNickname}>
+            확인
+          </button>
         </div>
       </section>
     </div>
