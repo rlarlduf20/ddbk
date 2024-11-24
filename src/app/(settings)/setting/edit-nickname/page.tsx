@@ -27,17 +27,19 @@ const inputStyles = css({
   outline: "none",
 });
 
-const EditNickNamePage = async () => {
+const EditNickNamePage = () => {
   return (
     <div className={settingStyles}>
       <section className={settingSectionStyles}>
         <div className={nicknameBoxStyles}>
-          <label htmlFor="nickname">닉네임</label>
-          <input
-            id="nickname"
-            placeholder="닉네임을 입력해주세요."
-            className={inputStyles}
-          />
+          <label htmlFor="nickname">
+            닉네임
+            <input
+              id="nickname"
+              placeholder="닉네임을 입력해주세요."
+              className={inputStyles}
+            />
+          </label>
           <button type="button">확인</button>
         </div>
       </section>
