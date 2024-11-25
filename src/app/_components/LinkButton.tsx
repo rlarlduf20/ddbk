@@ -4,18 +4,21 @@ import { useRouter } from "next/navigation";
 
 interface Props {
   children: React.ReactNode;
-  href: string;
+  path: string;
 }
 
-const LinkButton = ({ children, href }: Props) => {
+const LinkButton = ({ children, path }: Props) => {
   const router = useRouter();
 
   const sendRouterEvent = () => {
     if (window !== undefined && window.ReactNativeWebView) {
-      window.ReactNativeWebView(JSON.stringify({ type: "ROUTER_EVENT", href }));
+      window.ReactNativeWebView.postMessage(
+        JSON.stringify({ type: "STACK_NAVIGATION", path }),
+      );
       return;
     }
-    router.push(href);
+    if (path === "back") router.back();
+    else router.push(path);
   };
 
   return (

@@ -45,12 +45,6 @@ const EditNickNamePage = () => {
         newNickname: nickname,
       }),
     });
-    if (window !== undefined && window.ReactNativeWebView) {
-      window.ReactNativeWebView.postMessage(
-        JSON.stringify({ type: "STACK_POP" }),
-      );
-      return;
-    }
 
     router.push("/setting");
   };
