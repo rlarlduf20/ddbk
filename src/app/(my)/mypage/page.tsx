@@ -1,5 +1,3 @@
-import GPSGroup from "../_components/GPSGroup";
-
 import Typography from "@/app/_components/Typography";
 import { auth } from "@/auth";
 
@@ -15,7 +13,6 @@ const MyPage = async () => {
       <Typography.PLarge>오뚜~~ HI</Typography.PLarge>
       <Typography.PMedium>오뚜~~ HI</Typography.PMedium>
       <Typography.PSmall>오뚜~~ HI</Typography.PSmall>
-      <GPSGroup />
     </div>
   );
 };
