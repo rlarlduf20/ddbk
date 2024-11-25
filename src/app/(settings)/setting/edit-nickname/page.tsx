@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 import { css } from "../../../../../styled-system/css";
@@ -30,6 +31,8 @@ const inputStyles = css({
 });
 
 const EditNickNamePage = () => {
+  const router = useRouter();
+
   const [nickname, setNickname] = useState<string>("");
 
   const handleChangeNickname = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -42,6 +45,14 @@ const EditNickNamePage = () => {
         newNickname: nickname,
       }),
     });
+    if (window !== undefined && window.ReactNativeWebView) {
+      window.ReactNativeWebView.postMessage(
+        JSON.stringify({ type: "STACK_POP" }),
+      );
+      return;
+    }
+
+    router.push("/setting");
   };
 
   return (
