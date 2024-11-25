@@ -3,6 +3,7 @@ import Link from "next/link";
 import { css } from "../../../../styled-system/css";
 import { hstack } from "../../../../styled-system/patterns";
 
+import LinkButton from "@/app/_components/LinkButton";
 import Typography from "@/app/_components/Typography";
 import { auth } from "@/auth";
 
@@ -48,7 +49,7 @@ const ProfileCard = async () => {
         <div className={profileImgStyles} />
         <Typography.PMedium>{session.user?.name}</Typography.PMedium>
       </div>
-      <Link href="/setting">설정</Link>
+      <LinkButton path="/setting">설정</LinkButton>
     </div>
   );
 };
