@@ -16,6 +16,7 @@ export default defineConfig({
           oddu_black02: { value: "#555555" },
           oddu_black03: { value: "#777777" },
           oddu_black04: { value: "#999999" },
+          oddu_white01: { value: "#F0F0EE" },
         },
       },
     },

@@ -12,7 +12,9 @@ const footprintContainerStyles = css({
 const FootPrintPage = () => {
   return (
     <section className={footprintContainerStyles}>
-      <Typography.H1 color="main_green">발자국탭은 준비중입니다!</Typography.H1>
+      <Typography.H1 color="oddu_green01">
+        발자국탭은 준비중입니다!
+      </Typography.H1>
     </section>
   );
 };
