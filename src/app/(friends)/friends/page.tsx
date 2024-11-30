@@ -12,7 +12,7 @@ const friendsContainerStyles = css({
 const FriendsPage = () => {
   return (
     <section className={friendsContainerStyles}>
-      <Typography.H1 color="main_pink">친구탭은 준비중입니다!</Typography.H1>
+      <Typography.H1>친구탭은 준비중입니다!</Typography.H1>
     </section>
   );
 };

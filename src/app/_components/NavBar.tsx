@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import Typography from "./Typography";
-import { hstack } from "../../../styled-system/patterns";
+import { hstack, vstack } from "../../../styled-system/patterns";
 import { NAVIGATION_LIST } from "../_constants/navigation";
 
 const navbarStyles = hstack({
@@ -17,14 +17,23 @@ const navbarStyles = hstack({
   borderRadius: { base: 0, md: "20px" },
   alignItems: "center",
   justifyContent: "space-between",
-  p: "17px 42px 29px",
+  p: "17px 20px 29px",
+  gap: "8px",
 });
 
-const NavBar = () => {
+const navbarItemStyles = vstack({
+  width: "60.2px",
+  justifyContent: "center",
+  alignItems: "center",
+  gap: "10px",
+});
+
+const NavBar = async () => {
   return (
     <nav className={navbarStyles}>
       {NAVIGATION_LIST.map((item) => (
-        <Link href={item.href} key={item.id}>
+        <Link key={item.id} href={item.href} className={navbarItemStyles}>
+          <item.icon />
           <Typography.SpanCaption color="oddu_white01">
             {item.name}
           </Typography.SpanCaption>
