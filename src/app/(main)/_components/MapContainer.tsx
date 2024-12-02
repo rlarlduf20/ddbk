@@ -2,36 +2,16 @@
 
 import Script from "next/script";
 
+import StartButton from "./StartButton";
+
 import Loading from "@/app/_components/Loading";
 import useGeoLocation from "@/app/_hooks/useGeolocation";
 import useMap from "@/app/_hooks/useMap";
-import usePermissionState from "@/app/_hooks/usePermissionState";
 
 const MapContainer = () => {
   const { location, isLoading } = useGeoLocation();
-  const { isPossibleLocationService, isPossiblePermissions } =
-    usePermissionState();
   const { handleScriptLoad } = useMap({ location });
 
-  const handleClickStartBtn = () => {
-    if (typeof window !== "undefined" && window.ReactNativeWebView) {
-      window.ReactNativeWebView.postMessage(
-        JSON.stringify({ type: "GPS_PERMISSION_STATE" }),
-      );
-
-      if (!isPossibleLocationService || !isPossiblePermissions) {
-        window.ReactNativeWebView.postMessage(
-          JSON.stringify({ type: "REQUEST_GPS_PERMISSIONS" }),
-        );
-        return;
-      }
-      window.ReactNativeWebView.postMessage(
-        JSON.stringify({ type: "STACK_TRACKING" }),
-      );
-      return;
-    }
-    alert("산책 시작은 앱에서 사용할 수 있습니다.");
-  };
   return (
     <>
       <Script
@@ -41,14 +21,14 @@ const MapContainer = () => {
       />
       {isLoading && <Loading />}
       <div id="map" style={{ width: "100vw", height: "100vh" }} />
-      <button
+      {/* <button
         type="button"
         onClick={handleClickStartBtn}
         style={{
-          margin: "20px",
           position: "fixed",
-          right: 50,
-          bottom: 300,
+          left: "50%",
+          transform: "translate(-50%, 0)",
+          bottom: 106,
           zIndex: 1000,
           backgroundColor: "white",
           padding: "10px 20px",
@@ -57,7 +37,8 @@ const MapContainer = () => {
         }}
       >
         산책 시작
-      </button>
+      </button> */}
+      <StartButton />
     </>
   );
 };
