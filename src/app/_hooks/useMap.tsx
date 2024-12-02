@@ -57,7 +57,15 @@ const useMap = ({ location }: Props) => {
     mapRef.current.setCenter(newCenter);
   }, [location]);
 
-  return { handleScriptLoad };
+  const moveToCurLocation = () => {
+    if (mapRef.current) {
+      mapRef.current.setCenter(
+        new naver.maps.LatLng(location.latitude, location.longitude),
+      );
+    }
+  };
+
+  return { handleScriptLoad, moveToCurLocation };
 };
 
 export default useMap;

@@ -22,7 +22,11 @@ const LinkButton = ({ children, path }: Props) => {
   };
 
   return (
-    <button type="button" onClick={sendRouterEvent}>
+    <button
+      type="button"
+      onClick={sendRouterEvent}
+      style={{ cursor: "pointer" }}
+    >
       {children}
     </button>
   );
