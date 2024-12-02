@@ -5,6 +5,7 @@ import { hstack } from "../../../../styled-system/patterns";
 
 import LinkButton from "@/app/_components/LinkButton";
 import Typography from "@/app/_components/Typography";
+import { getUser } from "@/app/_lib/db/user";
 import SettingIcon from "@/assets/icons/SettingIcon";
 import { auth } from "@/auth";
 
@@ -55,6 +56,8 @@ const profileProgressInnerBarStyles = css({
 const ProfileCard = async () => {
   const session = await auth();
 
+  const user = await getUser(session?.user?.id);
+
   if (!session) {
     return (
       <div className={profileCardStyles}>
@@ -69,7 +72,7 @@ const ProfileCard = async () => {
         <div className={profileImgStyles} />
         <div>
           <div className={profileStatStyles}>
-            <Typography.H4>{session.user?.name}</Typography.H4>
+            <Typography.H4>{user?.name}</Typography.H4>
             <Typography.SpanCaption color="oddu_black02">
               Today
             </Typography.SpanCaption>
