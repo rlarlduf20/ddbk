@@ -1,3 +1,5 @@
+"use client";
+
 import { hstack } from "../../../../styled-system/patterns";
 
 import usePermissionState from "@/app/_hooks/usePermissionState";
@@ -46,6 +48,7 @@ const StartButton = () => {
     }
     alert("산책 시작은 앱에서 사용할 수 있습니다.");
   };
+
   return (
     <button
       type="button"
