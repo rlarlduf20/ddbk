@@ -1,11 +1,8 @@
 "use client";
 
-import { signIn } from "next-auth/react";
-
 import { css } from "../../../../styled-system/css";
 
 import { logIn } from "@/app/_actions/auth";
-// import { auth } from "@/auth";
 
 const signContainerStyles = css({
   width: "100%",
@@ -15,11 +12,7 @@ const signContainerStyles = css({
 });
 
 const SignIn = () => {
-  const handleLogin = async () => {
-    if (window !== undefined && window.ReactNativeWebView) {
-      await signIn("kakao", { redirectTo: "/signIn/redirect" });
-      return;
-    }
+  const handleLogin = () => {
     logIn("kakao");
   };
 
