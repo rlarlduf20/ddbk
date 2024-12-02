@@ -22,7 +22,6 @@ const useGeoLocation = () => {
       if (data.latitude && data.longitude) {
         setLocation({ latitude: data.latitude, longitude: data.longitude });
       }
-
       setIsLoading(false);
     };
 
