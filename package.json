@@ -13,6 +13,7 @@
   "dependencies": {
     "@auth/prisma-adapter": "^2.7.4",
     "@prisma/client": "^5.22.0",
+    "@tanstack/react-query": "^5.62.0",
     "@types/bcryptjs": "^2.4.6",
     "@types/navermaps": "^3.7.8",
     "bcryptjs": "^2.4.3",
@@ -24,6 +25,7 @@
   },
   "devDependencies": {
     "@pandacss/dev": "^0.47.0",
+    "@tanstack/eslint-plugin-query": "^5.61.6",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
