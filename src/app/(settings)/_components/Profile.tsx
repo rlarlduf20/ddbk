@@ -4,6 +4,7 @@ import { css } from "../../../../styled-system/css";
 import { hstack } from "../../../../styled-system/patterns";
 
 import Typography from "@/app/_components/Typography";
+import { getUser } from "@/app/_lib/db/user";
 import { auth } from "@/auth";
 
 const profileCardStyles = hstack({
@@ -25,6 +26,8 @@ const profileImgStyles = css({
 const ProfileCard = async () => {
   const session = await auth();
 
+  const user = await getUser(session?.user?.id);
+
   if (!session) {
     return (
       <div className={profileCardStyles}>
@@ -37,7 +40,7 @@ const ProfileCard = async () => {
     <div className={profileCardStyles}>
       <div className={profileInfoStyles}>
         <div className={profileImgStyles} />
-        <Typography.PMedium>{session.user?.name}</Typography.PMedium>
+        <Typography.PMedium>{user?.name}</Typography.PMedium>
       </div>
       <Link href="/setting/edit-nickname">닉네임 변경</Link>
     </div>

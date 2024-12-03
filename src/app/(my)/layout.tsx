@@ -4,6 +4,7 @@ import "../globals.css";
 import NavBar from "../_components/NavBar";
 
 import { auth } from "@/auth";
+import ReactQueryProvider from "@/ReactQueryProvider";
 
 export default async function RootLayout({
   children,
@@ -13,12 +14,14 @@ export default async function RootLayout({
   const session = await auth();
   return (
     <SessionProvider session={session}>
-      <html lang="ko">
-        <body>
-          <NavBar />
-          <main>{children}</main>
-        </body>
-      </html>
+      <ReactQueryProvider>
+        <html lang="ko">
+          <body>
+            <NavBar />
+            <main>{children}</main>
+          </body>
+        </html>
+      </ReactQueryProvider>
     </SessionProvider>
   );
 }
