@@ -31,7 +31,7 @@ interface ButtonProps {
   size?: "small" | "medium" | "large";
   rounded?: boolean;
   children: React.ReactNode;
-  handleClick: any;
+  handleClick?: any;
 }
 
 const Button = ({
