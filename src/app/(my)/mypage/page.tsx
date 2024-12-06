@@ -20,7 +20,7 @@ const MyPage = () => {
 
   return (
     <div style={{ paddingTop: "100px" }}>
-      <Typography.H1 color="oddu_green01">{user.user.name}</Typography.H1>
+      <Typography.H1 color="oddu_green01">{user?.user?.name}</Typography.H1>
       <Typography.H2>오뚜~~ HI</Typography.H2>
       <Typography.H3>오뚜~~ HI</Typography.H3>
       <Typography.H4>오뚜~~ HI</Typography.H4>
