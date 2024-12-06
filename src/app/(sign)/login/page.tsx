@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 import { css } from "../../../../styled-system/css";
 import { vstack } from "../../../../styled-system/patterns";
@@ -38,8 +39,13 @@ const kakaoButtonStyles = css({
 });
 
 const LoginPage = () => {
-  const handleLogin = () => {
+  const router = useRouter();
+
+  const handleLoginKakao = () => {
     logIn("kakao");
+  };
+  const handleLoginId = () => {
+    router.push("/id-login");
   };
 
   return (
@@ -48,13 +54,17 @@ const LoginPage = () => {
         <Image src={Logo} alt="로고" width={200} height={100} />
       </Link>
       <div className={signBoxStyles}>
-        <button type="button" className={credentialButtonStyles}>
+        <button
+          type="button"
+          className={credentialButtonStyles}
+          onClick={handleLoginId}
+        >
           아이디로 로그인하기
         </button>
         <button
           type="button"
           className={kakaoButtonStyles}
-          onClick={handleLogin}
+          onClick={handleLoginKakao}
         >
           카카오로 로그인하기
         </button>
