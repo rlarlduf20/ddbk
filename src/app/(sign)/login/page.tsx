@@ -37,7 +37,7 @@ const kakaoButtonStyles = css({
   cursor: "pointer",
 });
 
-const SignIn = () => {
+const LoginPage = () => {
   const handleLogin = () => {
     logIn("kakao");
   };
@@ -56,11 +56,11 @@ const SignIn = () => {
           className={kakaoButtonStyles}
           onClick={handleLogin}
         >
-          카카오 로그인
+          카카오로 로그인하기
         </button>
       </div>
     </div>
   );
 };
 
-export default SignIn;
+export default LoginPage;

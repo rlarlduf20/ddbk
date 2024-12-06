@@ -11,7 +11,7 @@ const withAuthRoutes = [
   "/review",
 ];
 
-const withOutAuthRoutes = ["/signIn"];
+const withOutAuthRoutes = ["/login", "/id-login"];
 
 export default async function middleware(request: NextRequest) {
   const session = await auth();
@@ -25,7 +25,7 @@ export default async function middleware(request: NextRequest) {
   );
 
   if (!session && isWithAuth) {
-    const absoluteURL = new URL("/signIn", request.nextUrl.origin);
+    const absoluteURL = new URL("/login", request.nextUrl.origin);
     return NextResponse.redirect(absoluteURL.toString());
   }
 
