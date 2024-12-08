@@ -5,15 +5,16 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 import { css } from "../../../../styled-system/css";
-import { vstack } from "../../../../styled-system/patterns";
+import { hstack, vstack } from "../../../../styled-system/patterns";
 
 import { logIn } from "@/app/_actions/auth";
+import KakaoSymbol from "@/assets/images/kakao-symbol.png";
 import Logo from "@/assets/images/logo-1st.png";
 
 const signContainerStyles = vstack({
   width: "100%",
   mt: "256px",
-  gap: "157px",
+  gap: "147px",
   justifyContent: "center",
 });
 
@@ -23,19 +24,26 @@ const signBoxStyles = vstack({
 
 const credentialButtonStyles = css({
   width: "335px",
-  height: "60px",
+  height: "52px",
   bgColor: "oddu_green01",
   borderRadius: "12px",
   color: "oddu_white01",
   cursor: "pointer",
+  fontSize: "15px",
+  fontWeight: 600,
 });
 
-const kakaoButtonStyles = css({
+const kakaoButtonStyles = hstack({
   width: "335px",
-  height: "60px",
+  height: "52px",
   bgColor: "#FEE500",
   borderRadius: "12px",
   cursor: "pointer",
+  color: "rgba(0, 0, 0, 0.85)",
+  fontSize: "15px",
+  fontWeight: 600,
+  gap: "8px",
+  justifyContent: "center",
 });
 
 const LoginPage = () => {
@@ -66,7 +74,13 @@ const LoginPage = () => {
           className={kakaoButtonStyles}
           onClick={handleLoginKakao}
         >
-          카카오로 로그인하기
+          <Image
+            src={KakaoSymbol}
+            alt="kakao_symbol"
+            width={18}
+            height={16.8}
+          />
+          <p>카카오로 로그인하기</p>
         </button>
       </div>
     </div>
