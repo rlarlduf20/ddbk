@@ -12,7 +12,7 @@ const buttonStyles = cva({
   variants: {
     color: {
       oddu_black03: { bgColor: "oddu_black03" },
-      oddu_green01: { color: "oddu_green01" },
+      oddu_green01: { bgColor: "oddu_green01" },
     },
     size: {
       large: { width: "335px", height: "60px" },

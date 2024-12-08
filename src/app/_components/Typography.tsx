@@ -132,10 +132,10 @@ const Typography = {
     <p className={typographyStyles.pSmall({ color })}>{children}</p>
   ),
   SpanButton: ({ children, color = "oddu_black01" }: Props) => (
-    <span className={typographyStyles.pSmall({ color })}>{children}</span>
+    <span className={typographyStyles.spanButton({ color })}>{children}</span>
   ),
   SpanCaption: ({ children, color = "oddu_black01" }: Props) => (
-    <span className={typographyStyles.pSmall({ color })}>{children}</span>
+    <span className={typographyStyles.spanCaption({ color })}>{children}</span>
   ),
 };
 
