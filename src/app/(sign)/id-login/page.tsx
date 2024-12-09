@@ -9,6 +9,7 @@ import { hstack, vstack } from "../../../../styled-system/patterns";
 import Button from "@/app/_components/Button";
 import Typography from "@/app/_components/Typography";
 import Logo from "@/assets/images/logo-1st.png";
+import Link from "next/link";
 
 const idLoginContainerStyles = vstack({
   mt: "118px",
@@ -72,7 +73,9 @@ const IDLoginPage = () => {
 
   return (
     <div className={idLoginContainerStyles}>
-      <Image src={Logo} alt="logo" width={200} height={100} />
+      <Link href="/">
+        <Image src={Logo} alt="logo" width={200} height={100} />
+      </Link>
       <form className={formStyles}>
         <label htmlFor="id" className={labelStyles}>
           <Typography.H4>아이디</Typography.H4>
