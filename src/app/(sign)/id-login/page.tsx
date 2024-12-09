@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 import { css } from "../../../../styled-system/css";
 import { hstack, vstack } from "../../../../styled-system/patterns";
@@ -61,6 +64,12 @@ const pwFindBoxStyles = css({
 });
 
 const IDLoginPage = () => {
+  const router = useRouter();
+
+  const handleClick = () => {
+    router.push("/id-login/register");
+  };
+
   return (
     <div className={idLoginContainerStyles}>
       <Image src={Logo} alt="logo" width={200} height={100} />
@@ -96,7 +105,7 @@ const IDLoginPage = () => {
         </button>
       </div>
       <div className={registerButtonBoxStyles}>
-        <Button size="large" color="oddu_green01">
+        <Button size="large" color="oddu_green01" handleClick={handleClick}>
           계정이 없다면 회원가입
         </Button>
       </div>
