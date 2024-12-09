@@ -2,7 +2,12 @@ import { cva } from "../../../styled-system/css";
 
 interface Props {
   children: React.ReactNode;
-  color?: "oddu_white01" | "oddu_green01" | "oddu_black01" | "oddu_black02";
+  color?:
+    | "oddu_white01"
+    | "oddu_green01"
+    | "oddu_black01"
+    | "oddu_black02"
+    | "oddu_black03";
 }
 
 const colorVariants = {
@@ -10,6 +15,7 @@ const colorVariants = {
   oddu_green01: { color: "oddu_green01" },
   oddu_black01: { color: "oddu_black01" },
   oddu_black02: { color: "oddu_black02" },
+  oddu_black03: { color: "oddu_black03" },
 };
 
 const typographyStyles = {

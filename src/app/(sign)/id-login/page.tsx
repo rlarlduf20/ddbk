@@ -105,8 +105,13 @@ const IDLoginPage = () => {
         </button>
       </div>
       <div className={registerButtonBoxStyles}>
-        <Button size="large" color="oddu_green01" handleClick={handleClick}>
-          계정이 없다면 회원가입
+        <Button
+          size="large"
+          color="oddu_green01"
+          outline
+          handleClick={handleClick}
+        >
+          계정이 없다면? 회원가입
         </Button>
       </div>
     </div>
