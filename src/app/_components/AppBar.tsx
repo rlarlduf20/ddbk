@@ -21,6 +21,7 @@ const appBarStyles = css({
   display: "flex",
   gap: "8px",
   margin: "0 auto",
+  px: "20px",
   alignItems: "center",
 });
 

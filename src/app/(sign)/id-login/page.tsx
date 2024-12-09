@@ -10,6 +10,7 @@ import Button from "@/app/_components/Button";
 import Typography from "@/app/_components/Typography";
 import Logo from "@/assets/images/logo-1st.png";
 import Link from "next/link";
+import LabelInput from "@/app/_components/LabelInput";
 
 const idLoginContainerStyles = vstack({
   mt: "118px",
@@ -19,20 +20,6 @@ const idLoginContainerStyles = vstack({
 const formStyles = vstack({
   gap: "12px",
   m: "36px 0 10px",
-});
-
-const labelStyles = vstack({
-  alignItems: "start",
-  gap: "8px",
-});
-
-const inputStyles = css({
-  outline: "none",
-  border: "1px solid",
-  borderColor: "oddu_black03",
-  borderRadius: "30px",
-  p: "16px 0 16px 20px",
-  width: "335px",
 });
 
 const loginButtonBoxStyles = css({
@@ -77,23 +64,18 @@ const IDLoginPage = () => {
         <Image src={Logo} alt="logo" width={200} height={100} />
       </Link>
       <form className={formStyles}>
-        <label htmlFor="id" className={labelStyles}>
-          <Typography.H4>아이디</Typography.H4>
-          <input
-            placeholder="아이디를 입력해주세요."
-            id="id"
-            className={inputStyles}
-          />
-        </label>
-        <label htmlFor="password" className={labelStyles}>
-          <Typography.H4>비밀번호</Typography.H4>
-          <input
-            placeholder="비밀번호를 입력해주세요."
-            type="password"
-            id="password"
-            className={inputStyles}
-          />
-        </label>
+        <LabelInput
+          type="text"
+          id="id"
+          placeholder="아이디를 입력해주세요."
+          label="아이디"
+        />
+        <LabelInput
+          type="password"
+          id="password"
+          placeholder="비밀번호를 입력해주세요."
+          label="비밀번호"
+        />
         <div className={loginButtonBoxStyles}>
           <Button size="large">로그인</Button>
         </div>
