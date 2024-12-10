@@ -17,6 +17,7 @@
     "@types/bcryptjs": "^2.4.6",
     "@types/navermaps": "^3.7.8",
     "bcryptjs": "^2.4.3",
+    "jotai": "^2.10.3",
     "next": "15.0.1",
     "next-auth": "^5.0.0-beta.25",
     "prisma": "^5.22.0",

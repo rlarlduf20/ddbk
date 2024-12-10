@@ -1,63 +1,79 @@
+import Typography from "./Typography";
 import { cva } from "../../../styled-system/css";
 
-// 버튼 스타일 정의
 const buttonStyles = cva({
   base: {
     display: "inline-flex",
     alignItems: "center",
     justifyContent: "center",
     cursor: "pointer",
-    transition: "all 0.3s ease",
     border: "none",
-    padding: "8px 16px",
+    boxSizing: "border-box",
   },
   variants: {
-    visual: {
-      outline: {
-        bg: "white",
-        border: "1px solid black",
-      },
-    },
     color: {
-      main_pink: { color: "main_pink" },
-      main_green: { color: "main_green" },
-      black: { color: "black" },
-      white: { color: "white" },
+      oddu_black03: { bgColor: "oddu_black03" },
+      oddu_green01: { bgColor: "oddu_green01" },
     },
     size: {
-      small: { fontSize: "12px", padding: "4px 8px" },
-      medium: { fontSize: "16px", padding: "8px 16px" },
-      large: { fontSize: "20px", padding: "12px 24px" },
+      large: { width: "335px", height: "60px" },
+      medium: { width: "164px", height: "60px" },
+      small: { width: "100px", height: "52px" },
     },
     rounded: {
       true: { borderRadius: "50%" },
-      false: { borderRadius: "4px" },
+      false: { borderRadius: "30px" },
+    },
+    outline: {
+      true: { border: "2px solid" },
+      false: { border: "none" },
     },
   },
+  compoundVariants: [
+    {
+      outline: true,
+      color: "oddu_black03",
+      css: { borderColor: "oddu_black03", bgColor: "oddu_white01" },
+    },
+    {
+      outline: true,
+      color: "oddu_green01",
+      css: { borderColor: "oddu_green01", bgColor: "oddu_white01" },
+    },
+  ],
 });
 
 interface ButtonProps {
-  color?: "main_pink" | "main_green" | "black" | "white";
+  color?: "oddu_green01" | "oddu_black03";
   size?: "small" | "medium" | "large";
   rounded?: boolean;
-  visual?: "outline";
+  outline?: boolean;
   children: React.ReactNode;
+  handleClick?: any;
+  type?: string;
+  disabled?: boolean;
 }
 
-// 동적으로 스타일을 관리하는 버튼 컴포넌트
 const Button = ({
-  color = "black",
+  color = "oddu_black03",
   size = "medium",
   rounded = false,
+  outline = false,
   children,
-  visual,
+  handleClick,
+  type = "button",
+  disabled = false,
 }: ButtonProps) => {
   return (
     <button
-      type="button"
-      className={buttonStyles({ color, size, rounded, visual })}
+      type={type === "submit" ? "submit" : "button"}
+      className={buttonStyles({ color, size, rounded, outline })}
+      onClick={handleClick}
+      disabled={disabled}
     >
-      {children}
+      <Typography.PMedium color={outline ? color : "oddu_white01"}>
+        {children}
+      </Typography.PMedium>
     </button>
   );
 };

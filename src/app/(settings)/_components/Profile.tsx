@@ -3,8 +3,8 @@ import Link from "next/link";
 import { css } from "../../../../styled-system/css";
 import { hstack } from "../../../../styled-system/patterns";
 
+import { getUser } from "@/app/_actions/user";
 import Typography from "@/app/_components/Typography";
-import { getUser } from "@/app/_lib/db/user";
 import { auth } from "@/auth";
 
 const profileCardStyles = hstack({
@@ -31,7 +31,7 @@ const ProfileCard = async () => {
   if (!session) {
     return (
       <div className={profileCardStyles}>
-        <Link href="/signIn">로그인</Link>
+        <Link href="/login">로그인</Link>
       </div>
     );
   }
