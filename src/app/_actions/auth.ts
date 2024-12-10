@@ -22,19 +22,18 @@ export const loginWithCreds = async (formData: FormData) => {
     redirectTo: "/",
   };
 
-  // try {
   await signIn("credentials", rawFormData);
-  // } catch (error: any) {
+
   //   if (error instanceof AuthError) {
-  //     switch (error.type) {
-  //       case "CredentialsSignin": {
-  //         return { error: "Invalid credentials!" };
-  //       }
-  //       default: {
-  //         return { error: "Internal Server Error!" };
-  //       }
-  //     }
+  // switch (error.type) {
+  //   case "CredentialsSignin": {
+  //     return { error: "Invalid credentials!" };
   //   }
+  //   default: {
+  //     return { error: "Internal Server Error!" };
+  //   }
+  // }
+  // }
   // }
   // return { error: "Unexpected error occurred!" };
 };

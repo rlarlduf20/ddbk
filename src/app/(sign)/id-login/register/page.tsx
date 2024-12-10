@@ -45,7 +45,9 @@ const IDRegisterPage = () => {
           label="닉네임"
         />
         <div className={registerButtonBoxStyles}>
-          <Button size="large">회원가입</Button>
+          <Button size="large" type="submit">
+            회원가입
+          </Button>
         </div>
       </form>
     </div>

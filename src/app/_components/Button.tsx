@@ -51,6 +51,7 @@ interface ButtonProps {
   children: React.ReactNode;
   handleClick?: any;
   type?: string;
+  disabled?: boolean;
 }
 
 const Button = ({
@@ -61,12 +62,14 @@ const Button = ({
   children,
   handleClick,
   type = "button",
+  disabled = false,
 }: ButtonProps) => {
   return (
     <button
       type={type === "submit" ? "submit" : "button"}
       className={buttonStyles({ color, size, rounded, outline })}
       onClick={handleClick}
+      disabled={disabled}
     >
       <Typography.PMedium color={outline ? color : "oddu_white01"}>
         {children}
