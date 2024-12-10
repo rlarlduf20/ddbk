@@ -50,6 +50,7 @@ interface ButtonProps {
   outline?: boolean;
   children: React.ReactNode;
   handleClick?: any;
+  type?: string;
 }
 
 const Button = ({
@@ -59,10 +60,11 @@ const Button = ({
   outline = false,
   children,
   handleClick,
+  type = "button",
 }: ButtonProps) => {
   return (
     <button
-      type="button"
+      type={type === "submit" ? "submit" : "button"}
       className={buttonStyles({ color, size, rounded, outline })}
       onClick={handleClick}
     >

@@ -1,12 +1,13 @@
+import Typography from "./Typography";
 import { css } from "../../../styled-system/css";
 import { vstack } from "../../../styled-system/patterns";
-import Typography from "./Typography";
 
 interface Props {
   id: string;
   label: string;
   placeholder: string;
   type: string;
+  name?: string;
 }
 
 const labelStyles = vstack({
@@ -25,7 +26,7 @@ const inputStyles = css({
   width: "335px",
 });
 
-const LabelInput = ({ id, label, placeholder, type }: Props) => {
+const LabelInput = ({ id, label, placeholder, type, name }: Props) => {
   return (
     <label htmlFor={id} className={labelStyles}>
       <Typography.H4>{label}</Typography.H4>
@@ -34,6 +35,7 @@ const LabelInput = ({ id, label, placeholder, type }: Props) => {
         id={id}
         className={inputStyles}
         type={type}
+        name={name}
       />
     </label>
   );

@@ -3,9 +3,9 @@ import Link from "next/link";
 import { css } from "../../../../styled-system/css";
 import { hstack } from "../../../../styled-system/patterns";
 
+import { getUser } from "@/app/_actions/user";
 import LinkButton from "@/app/_components/LinkButton";
 import Typography from "@/app/_components/Typography";
-import { getUser } from "@/app/_lib/db/user";
 import SettingIcon from "@/assets/icons/SettingIcon";
 import { auth } from "@/auth";
 

@@ -1,8 +1,9 @@
-import AppBar from "@/app/_components/AppBar";
-import LabelInput from "@/app/_components/LabelInput";
-import { vstack } from "../../../../../styled-system/patterns";
-import Button from "@/app/_components/Button";
 import { css } from "../../../../../styled-system/css";
+import { vstack } from "../../../../../styled-system/patterns";
+
+import AppBar from "@/app/_components/AppBar";
+import Button from "@/app/_components/Button";
+import LabelInput from "@/app/_components/LabelInput";
 
 const formStyles = vstack({
   gap: "30px",
@@ -21,7 +22,7 @@ const IDRegisterPage = () => {
       <form className={formStyles}>
         <LabelInput
           type="text"
-          id="id"
+          id="loginId"
           placeholder="아이디를 입력해주세요."
           label="아이디"
         />

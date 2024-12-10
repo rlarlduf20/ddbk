@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-import { getUser } from "@/app/_lib/db/user";
+import { getUser } from "@/app/_actions/user";
 import { auth } from "@/auth";
 
 export async function GET() {

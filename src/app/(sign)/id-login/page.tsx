@@ -1,16 +1,17 @@
 "use client";
 
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 import { css } from "../../../../styled-system/css";
 import { hstack, vstack } from "../../../../styled-system/patterns";
+import LoginButton from "../_components/LoginButton";
+import NavRegisterButton from "../_components/NavRegisterButton";
 
-import Button from "@/app/_components/Button";
+import { loginWithCreds } from "@/app/_actions/auth";
+import LabelInput from "@/app/_components/LabelInput";
 import Typography from "@/app/_components/Typography";
 import Logo from "@/assets/images/logo-1st.png";
-import Link from "next/link";
-import LabelInput from "@/app/_components/LabelInput";
 
 const idLoginContainerStyles = vstack({
   mt: "118px",
@@ -20,15 +21,6 @@ const idLoginContainerStyles = vstack({
 const formStyles = vstack({
   gap: "12px",
   m: "36px 0 10px",
-});
-
-const loginButtonBoxStyles = css({
-  mt: "18px",
-});
-
-const registerButtonBoxStyles = css({
-  position: "absolute",
-  bottom: "46px",
 });
 
 const findBoxStyles = hstack({
@@ -52,33 +44,27 @@ const pwFindBoxStyles = css({
 });
 
 const IDLoginPage = () => {
-  const router = useRouter();
-
-  const handleClick = () => {
-    router.push("/id-login/register");
-  };
-
   return (
     <div className={idLoginContainerStyles}>
       <Link href="/">
         <Image src={Logo} alt="logo" width={200} height={100} />
       </Link>
-      <form className={formStyles}>
+      <form action={loginWithCreds} className={formStyles}>
         <LabelInput
           type="text"
-          id="id"
+          id="loginId"
+          name="loginId"
           placeholder="아이디를 입력해주세요."
           label="아이디"
         />
         <LabelInput
           type="password"
           id="password"
+          name="password"
           placeholder="비밀번호를 입력해주세요."
           label="비밀번호"
         />
-        <div className={loginButtonBoxStyles}>
-          <Button size="large">로그인</Button>
-        </div>
+        <LoginButton />
       </form>
       <div className={findBoxStyles}>
         <button type="button" className={idFindBoxStyles}>
@@ -89,16 +75,7 @@ const IDLoginPage = () => {
           <Typography.SpanButton>비밀번호 찾기</Typography.SpanButton>
         </button>
       </div>
-      <div className={registerButtonBoxStyles}>
-        <Button
-          size="large"
-          color="oddu_green01"
-          outline
-          handleClick={handleClick}
-        >
-          계정이 없다면? 회원가입
-        </Button>
-      </div>
+      <NavRegisterButton />
     </div>
   );
 };
