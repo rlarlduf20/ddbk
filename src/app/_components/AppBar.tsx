@@ -1,10 +1,7 @@
 import Typography from "./Typography";
-import { hstack } from "../../../styled-system/patterns";
+import { css } from "../../../styled-system/css";
 
 import LeftArrowIcon from "@/assets/icons/LeftArrowIcon";
-import HomeIcon from "@/assets/icons/HomeIcon";
-import { css } from "../../../styled-system/css";
-import NavBar from "./NavBar";
 
 interface Props {
   children: React.ReactNode;
