@@ -37,10 +37,17 @@ const RegisterForm = () => {
 
   const [loginId, setLoginId] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [passwordConfirm, setPasswordConfirm] = useState<string>("");
   const [name, setName] = useState<string>("");
+
   const isCheckDuplicatedBtnDisabled = !loginId || isDuplicated === false;
+  const isMatchedPassword = password === passwordConfirm;
   const isActiveRegisterBtn =
-    isDuplicated === false && !!loginId && !!password && !!name;
+    isDuplicated === false &&
+    !!loginId &&
+    !!password &&
+    !!name &&
+    isMatchedPassword;
 
   const handleClickDuplicate = async () => {
     const isDuplicate = await handleClickDuplicateBtn(loginId);
@@ -54,6 +61,11 @@ const RegisterForm = () => {
   };
   const handleChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
+  };
+  const handleChangePasswordConfirm = (
+    e: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    setPasswordConfirm(e.target.value);
   };
   const handleChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
@@ -104,6 +116,10 @@ const RegisterForm = () => {
         id="passwordConfirm"
         placeholder="비밀번호를 한번 더 입력해주세요."
         label="비밀번호 확인"
+        value={passwordConfirm}
+        handleChange={handleChangePasswordConfirm}
+        error={isMatchedPassword === false}
+        errorText="비밀번호가 틀립니다."
       />
       <LabelInput
         type="text"
