@@ -36,8 +36,11 @@ const RegisterForm = () => {
   const [isDuplicated, setIsDuplicated] = useState<boolean | null>(null);
 
   const [loginId, setLoginId] = useState<string>("");
-
+  const [password, setPassword] = useState<string>("");
+  const [name, setName] = useState<string>("");
   const isCheckDuplicatedBtnDisabled = !loginId || isDuplicated === false;
+  const isActiveRegisterBtn =
+    isDuplicated === false && !!loginId && !!password && !!name;
 
   const handleClickDuplicate = async () => {
     const isDuplicate = await handleClickDuplicateBtn(loginId);
@@ -48,6 +51,12 @@ const RegisterForm = () => {
   const handleChangeLoginId = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIsDuplicated(null);
     setLoginId(e.target.value);
+  };
+  const handleChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value);
+  };
+  const handleChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setName(e.target.value);
   };
 
   return (
@@ -87,6 +96,8 @@ const RegisterForm = () => {
         name="password"
         placeholder="비밀번호를 8자리 이상 입력해주세요."
         label="비밀번호"
+        value={password}
+        handleChange={handleChangePassword}
       />
       <LabelInput
         type="password"
@@ -100,9 +111,16 @@ const RegisterForm = () => {
         name="name"
         placeholder="닉네임을 입력해주세요."
         label="닉네임"
+        value={name}
+        handleChange={handleChangeName}
       />
       <div className={registerButtonBoxStyles}>
-        <Button size="large" type="submit">
+        <Button
+          color={isActiveRegisterBtn ? "oddu_green01" : "oddu_black03"}
+          size="large"
+          type="submit"
+          disabled={!isActiveRegisterBtn}
+        >
           회원가입
         </Button>
       </div>
