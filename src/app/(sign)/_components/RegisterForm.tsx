@@ -1,10 +1,13 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useFormStatus } from "react-dom";
 
 import { css } from "../../../../styled-system/css";
 import { hstack, vstack } from "../../../../styled-system/patterns";
 
+import { registerWithCreds } from "@/app/_actions/auth";
 import Button from "@/app/_components/Button";
 import LabelInput from "@/app/_components/LabelInput";
 import Typography from "@/app/_components/Typography";
@@ -33,6 +36,9 @@ const availableTextStyles = css({
 });
 
 const RegisterForm = () => {
+  const { pending } = useFormStatus();
+  const router = useRouter();
+
   const [isDuplicated, setIsDuplicated] = useState<boolean | null>(null);
 
   const [loginId, setLoginId] = useState<string>("");
@@ -71,8 +77,22 @@ const RegisterForm = () => {
     setName(e.target.value);
   };
 
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+      const formData = new FormData(e?.currentTarget);
+      await registerWithCreds(formData);
+
+      alert("회원가입에 성공했습니다.");
+      //   TODO: 앱에서의 이동
+      router.push("/");
+    } catch {
+      alert("회원가입에 실패했습니다.");
+    }
+  };
+
   return (
-    <form className={formStyles}>
+    <form className={formStyles} onSubmit={handleSubmit}>
       <div className={idBoxStyles}>
         <LabelInput
           type="text"
@@ -106,7 +126,7 @@ const RegisterForm = () => {
         type="password"
         id="password"
         name="password"
-        placeholder="비밀번호를 8자리 이상 입력해주세요."
+        placeholder="비밀번호를 입력해주세요."
         label="비밀번호"
         value={password}
         handleChange={handleChangePassword}
@@ -137,7 +157,7 @@ const RegisterForm = () => {
           type="submit"
           disabled={!isActiveRegisterBtn}
         >
-          회원가입
+          {pending ? "Loading..." : "회원가입"}
         </Button>
       </div>
     </form>
