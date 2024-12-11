@@ -10,6 +10,7 @@ interface Props {
   name?: string;
   value?: string;
   handleChange?: (e: any) => void;
+  size?: "medium" | "large";
 }
 
 const labelStyles = vstack({
@@ -25,12 +26,15 @@ const inputStyles = cva({
     borderRadius: "30px",
     p: "16px 0 16px 20px",
     height: "52px",
-    width: "335px",
   },
   variants: {
     hasValue: {
       true: { borderColor: "oddu_green01" },
       false: { borderColor: "oddu_black03" },
+    },
+    size: {
+      large: { width: "335px" },
+      medium: { width: "225px" },
     },
   },
 });
@@ -42,6 +46,7 @@ const LabelInput = ({
   type,
   name,
   value,
+  size = "large",
   handleChange,
 }: Props) => {
   return (
@@ -50,7 +55,7 @@ const LabelInput = ({
       <input
         placeholder={placeholder}
         id={id}
-        className={inputStyles({ hasValue: !!value })}
+        className={inputStyles({ hasValue: !!value, size })}
         type={type}
         name={name}
         value={value}
