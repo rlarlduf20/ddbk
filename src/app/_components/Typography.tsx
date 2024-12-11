@@ -7,7 +7,8 @@ interface Props {
     | "oddu_green01"
     | "oddu_black01"
     | "oddu_black02"
-    | "oddu_black03";
+    | "oddu_black03"
+    | "oddu_red01";
 }
 
 const colorVariants = {
@@ -16,6 +17,7 @@ const colorVariants = {
   oddu_black01: { color: "oddu_black01" },
   oddu_black02: { color: "oddu_black02" },
   oddu_black03: { color: "oddu_black03" },
+  oddu_red01: { color: "oddu_red01" },
 };
 
 const typographyStyles = {
