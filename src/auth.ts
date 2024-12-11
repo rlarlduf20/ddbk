@@ -4,7 +4,6 @@ import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import Kakao from "next-auth/providers/kakao";
 
-// import { saltAndHashPassword } from "./app/_lib/hash";
 import { prisma } from "./prisma";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
@@ -30,19 +29,12 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         }
 
         const { loginId } = credentials;
-        // const hash = saltAndHashPassword(credentials.password);
 
         const user = await prisma.user.findUnique({
           where: { loginId },
         });
 
         if (!user) {
-          // user = await prisma.user.create({
-          //   data: {
-          //     loginId,
-          //     password: hash,
-          //   },
-          // });
           throw new Error("존재하지 않는 아이디입니다.");
         } else {
           const isMatch = bcrypt.compareSync(
