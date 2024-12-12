@@ -40,13 +40,16 @@ const RegisterForm = () => {
   const { push } = useRouterEvent();
 
   const [isDuplicated, setIsDuplicated] = useState<boolean | null>(null);
+  const [checkDuplicateLoading, setCheckDuplicateLoading] =
+    useState<boolean>(false);
 
   const [loginId, setLoginId] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [passwordConfirm, setPasswordConfirm] = useState<string>("");
   const [name, setName] = useState<string>("");
 
-  const isCheckDuplicatedBtnDisabled = !loginId || isDuplicated === false;
+  const isCheckDuplicatedBtnDisabled =
+    !loginId || isDuplicated === false || checkDuplicateLoading;
   const isMatchedPassword = password === passwordConfirm;
   const isActiveRegisterBtn =
     isDuplicated === false &&
@@ -56,9 +59,11 @@ const RegisterForm = () => {
     isMatchedPassword;
 
   const handleClickDuplicate = async () => {
+    setCheckDuplicateLoading(true);
     const isDuplicate = await handleClickDuplicateBtn(loginId);
 
     setIsDuplicated(isDuplicate);
+    setCheckDuplicateLoading(false);
   };
 
   const handleChangeLoginId = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -119,7 +124,7 @@ const RegisterForm = () => {
           handleClick={handleClickDuplicate}
           disabled={isCheckDuplicatedBtnDisabled}
         >
-          중복 확인
+          {checkDuplicateLoading ? "Loading..." : "중복 확인"}
         </Button>
       </div>
       <LabelInput
