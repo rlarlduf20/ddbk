@@ -3,6 +3,7 @@
 import { hstack } from "../../../../styled-system/patterns";
 
 import usePermissionState from "@/app/_hooks/usePermissionState";
+import useRouterEvent from "@/app/_hooks/useRouterEvent";
 
 const startButtonStyles = hstack({
   position: "fixed",
@@ -28,6 +29,7 @@ const startButtonStyles = hstack({
 const StartButton = () => {
   const { isPossibleLocationService, isPossiblePermissions } =
     usePermissionState();
+  const { push } = useRouterEvent();
 
   const handleClickStartBtn = () => {
     if (typeof window !== "undefined" && window.ReactNativeWebView) {
@@ -41,9 +43,7 @@ const StartButton = () => {
         );
         return;
       }
-      window.ReactNativeWebView.postMessage(
-        JSON.stringify({ type: "STACK_TRACKING" }),
-      );
+      push({ path: "/tracking", method: "reset" });
       return;
     }
     alert("산책 시작은 앱에서 사용할 수 있습니다.");
