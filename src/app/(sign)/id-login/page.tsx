@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 
 import { css } from "../../../../styled-system/css";
 import { hstack, vstack } from "../../../../styled-system/patterns";
@@ -37,9 +36,7 @@ const pwFindBoxStyles = css({
 const IDLoginPage = () => {
   return (
     <div className={idLoginContainerStyles}>
-      <Link href="/">
-        <Image src={Logo} alt="logo" width={200} height={100} />
-      </Link>
+      <Image src={Logo} alt="logo" width={200} height={100} />
       <LoginForm />
       <div className={findBoxStyles}>
         <button type="button" className={idFindBoxStyles}>

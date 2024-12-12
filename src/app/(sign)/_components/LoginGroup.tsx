@@ -1,12 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 
 import { css } from "../../../../styled-system/css";
 import { hstack, vstack } from "../../../../styled-system/patterns";
 
 import { logIn } from "@/app/_actions/auth";
+import useRouterEvent from "@/app/_hooks/useRouterEvent";
 import KakaoSymbol from "@/assets/images/kakao-symbol.png";
 
 const signBoxStyles = vstack({
@@ -38,14 +38,15 @@ const kakaoButtonStyles = hstack({
 });
 
 const LoginGroup = () => {
-  const router = useRouter();
+  const { push } = useRouterEvent();
 
   const handleLoginKakao = () => {
     logIn("kakao");
   };
   const handleLoginId = () => {
-    router.push("/id-login");
+    push({ path: "/id-login" });
   };
+
   return (
     <div className={signBoxStyles}>
       <button

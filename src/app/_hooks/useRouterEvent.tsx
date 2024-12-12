@@ -1,20 +1,20 @@
 import { useRouter } from "next/navigation";
 
-interface Props {
-  path: string;
-  method: "navigate" | "back" | "reset";
+interface RouterType {
+  path?: string;
+  method?: "navigate" | "back" | "reset";
 }
 
-const useRouterEvent = ({ path = "/", method = "navigate" }: Props) => {
+const useRouterEvent = () => {
   const router = useRouter();
 
-  const push = () => {
+  const push = ({ path = "/", method = "navigate" }: RouterType) => {
     if (typeof window !== "undefined" && window.ReactNativeWebView) {
       window.ReactNativeWebView.postMessage(
         JSON.stringify({ type: "STACK_NAVIGATION", path, method }),
       );
     } else {
-      switch (path) {
+      switch (method) {
         case "back": {
           router.back();
           break;
