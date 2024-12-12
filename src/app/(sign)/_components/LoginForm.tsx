@@ -1,7 +1,6 @@
 "use client";
 
 import { useAtom } from "jotai";
-import { useRouter } from "next/navigation";
 
 import LoginButton from "./LoginButton";
 import { vstack } from "../../../../styled-system/patterns";
@@ -9,6 +8,7 @@ import { vstack } from "../../../../styled-system/patterns";
 import { loginWithCreds } from "@/app/_actions/auth";
 import { loginIdAtom, passwordAtom } from "@/app/_atoms";
 import LabelInput from "@/app/_components/LabelInput";
+import useRouterEvent from "@/app/_hooks/useRouterEvent";
 
 const formStyles = vstack({
   gap: "12px",
@@ -16,7 +16,7 @@ const formStyles = vstack({
 });
 
 const LoginForm = () => {
-  const router = useRouter();
+  const { push } = useRouterEvent();
 
   const [loginId, setLoginId] = useAtom(loginIdAtom);
   const [password, setPassword] = useAtom(passwordAtom);
@@ -28,7 +28,7 @@ const LoginForm = () => {
       await loginWithCreds(formData);
 
       //   TODO: 앱에서의 이동
-      router.push("/");
+      push({ path: "/", method: "reset" });
     } catch {
       alert("로그인 정보를 다시 확인해주세요.");
     }

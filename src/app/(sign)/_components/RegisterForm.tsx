@@ -1,6 +1,5 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useFormStatus } from "react-dom";
 
@@ -11,6 +10,7 @@ import { registerWithCreds } from "@/app/_actions/auth";
 import Button from "@/app/_components/Button";
 import LabelInput from "@/app/_components/LabelInput";
 import Typography from "@/app/_components/Typography";
+import useRouterEvent from "@/app/_hooks/useRouterEvent";
 import { handleClickDuplicateBtn } from "@/app/_lib/api-queryFn/auth";
 
 const formStyles = vstack({
@@ -37,16 +37,19 @@ const availableTextStyles = css({
 
 const RegisterForm = () => {
   const { pending } = useFormStatus();
-  const router = useRouter();
+  const { push } = useRouterEvent();
 
   const [isDuplicated, setIsDuplicated] = useState<boolean | null>(null);
+  const [checkDuplicateLoading, setCheckDuplicateLoading] =
+    useState<boolean>(false);
 
   const [loginId, setLoginId] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [passwordConfirm, setPasswordConfirm] = useState<string>("");
   const [name, setName] = useState<string>("");
 
-  const isCheckDuplicatedBtnDisabled = !loginId || isDuplicated === false;
+  const isCheckDuplicatedBtnDisabled =
+    !loginId || isDuplicated === false || checkDuplicateLoading;
   const isMatchedPassword = password === passwordConfirm;
   const isActiveRegisterBtn =
     isDuplicated === false &&
@@ -56,9 +59,11 @@ const RegisterForm = () => {
     isMatchedPassword;
 
   const handleClickDuplicate = async () => {
+    setCheckDuplicateLoading(true);
     const isDuplicate = await handleClickDuplicateBtn(loginId);
 
     setIsDuplicated(isDuplicate);
+    setCheckDuplicateLoading(false);
   };
 
   const handleChangeLoginId = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -85,7 +90,7 @@ const RegisterForm = () => {
 
       alert("회원가입에 성공했습니다.");
       //   TODO: 앱에서의 이동
-      router.push("/");
+      push({ method: "back" });
     } catch {
       alert("회원가입에 실패했습니다.");
     }
@@ -119,7 +124,7 @@ const RegisterForm = () => {
           handleClick={handleClickDuplicate}
           disabled={isCheckDuplicatedBtnDisabled}
         >
-          중복 확인
+          {checkDuplicateLoading ? "Loading..." : "중복 확인"}
         </Button>
       </div>
       <LabelInput

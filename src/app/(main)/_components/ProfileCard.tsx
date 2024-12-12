@@ -1,12 +1,11 @@
 import Link from "next/link";
 
+import SettingButton from "./SettingButton";
 import { css } from "../../../../styled-system/css";
 import { hstack } from "../../../../styled-system/patterns";
 
 import { getUser } from "@/app/_actions/user";
-import LinkButton from "@/app/_components/LinkButton";
 import Typography from "@/app/_components/Typography";
-import SettingIcon from "@/assets/icons/SettingIcon";
 import { auth } from "@/auth";
 
 const profileCardStyles = hstack({
@@ -77,9 +76,7 @@ const ProfileCard = async () => {
               Today
             </Typography.SpanCaption>
             <Typography.PMedium>{8000}보</Typography.PMedium>
-            <LinkButton path="/setting">
-              <SettingIcon />
-            </LinkButton>
+            <SettingButton />
           </div>
           <Typography.PMedium>이번주 발도장</Typography.PMedium>
           <div className={profileProgressBarStyles}>

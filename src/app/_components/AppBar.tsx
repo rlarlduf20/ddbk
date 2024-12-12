@@ -1,5 +1,8 @@
+"use client";
+
 import Typography from "./Typography";
 import { css } from "../../../styled-system/css";
+import useRouterEvent from "../_hooks/useRouterEvent";
 
 import LeftArrowIcon from "@/assets/icons/LeftArrowIcon";
 
@@ -23,11 +26,17 @@ const appBarStyles = css({
 });
 
 const AppBar = ({ children }: Props) => {
+  const { push } = useRouterEvent();
+  const handleClick = () => {
+    push({ method: "back" });
+  };
   return (
     <div style={{ width: "100%" }}>
       <div className={statusBlankBarStyles} />
       <div className={appBarStyles}>
-        <LeftArrowIcon fill="#333" />
+        <button type="button" onClick={handleClick}>
+          <LeftArrowIcon fill="#333" />
+        </button>
         <Typography.H3>{children}</Typography.H3>
       </div>
     </div>
