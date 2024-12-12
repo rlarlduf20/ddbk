@@ -7,8 +7,7 @@ import { css } from "../../../../styled-system/css";
 import Button from "@/app/_components/Button";
 
 const registerButtonBoxStyles = css({
-  position: "absolute",
-  bottom: "46px",
+  mt: "132px",
 });
 
 const NavRegisterButton = () => {

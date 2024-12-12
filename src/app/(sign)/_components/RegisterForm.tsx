@@ -25,8 +25,7 @@ const idBoxStyles = hstack({
 });
 
 const registerButtonBoxStyles = css({
-  position: "absolute",
-  bottom: "46px",
+  mt: "100px",
 });
 
 const availableTextStyles = css({
@@ -89,7 +88,7 @@ const RegisterForm = () => {
       await registerWithCreds(formData);
 
       alert("회원가입에 성공했습니다.");
-      //   TODO: 앱에서의 이동
+
       push({ method: "back" });
     } catch {
       alert("회원가입에 실패했습니다.");

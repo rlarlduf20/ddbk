@@ -9,7 +9,6 @@ import Typography from "@/app/_components/Typography";
 import Logo from "@/assets/images/logo-1st.png";
 
 const idLoginContainerStyles = vstack({
-  minH: "812px",
   mt: "118px",
   gap: 0,
 });
