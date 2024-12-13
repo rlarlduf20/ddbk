@@ -1,7 +1,10 @@
 import { SessionProvider } from "next-auth/react";
+import { ToastContainer } from "react-toastify";
 
 import "../globals.css";
 import { auth } from "@/auth";
+
+import "react-toastify/dist/ReactToastify.css";
 
 export default async function RootLayout({
   children,
@@ -12,7 +15,10 @@ export default async function RootLayout({
   return (
     <SessionProvider session={session}>
       <html lang="ko">
-        <body>{children}</body>
+        <body>
+          {children}
+          <ToastContainer />
+        </body>
       </html>
     </SessionProvider>
   );

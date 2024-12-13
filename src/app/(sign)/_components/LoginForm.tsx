@@ -1,6 +1,7 @@
 "use client";
 
 import { useAtom } from "jotai";
+import { toast } from "react-toastify";
 
 import LoginButton from "./LoginButton";
 import { vstack } from "../../../../styled-system/patterns";
@@ -17,7 +18,6 @@ const formStyles = vstack({
 
 const LoginForm = () => {
   const { push } = useRouterEvent();
-
   const [loginId, setLoginId] = useAtom(loginIdAtom);
   const [password, setPassword] = useAtom(passwordAtom);
 
@@ -30,7 +30,7 @@ const LoginForm = () => {
       //   TODO: 앱에서의 이동
       push({ path: "/", method: "reset" });
     } catch {
-      alert("로그인 정보를 다시 확인해주세요.");
+      toast("로그인 정보를 다시 확인해주세요.");
     }
   };
   return (
