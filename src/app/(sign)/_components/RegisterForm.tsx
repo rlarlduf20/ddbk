@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useFormStatus } from "react-dom";
+import { toast } from "react-toastify";
 
 import { css } from "../../../../styled-system/css";
 import { hstack, vstack } from "../../../../styled-system/patterns";
@@ -87,11 +88,9 @@ const RegisterForm = () => {
       const formData = new FormData(e?.currentTarget);
       await registerWithCreds(formData);
 
-      alert("회원가입에 성공했습니다.");
-
       push({ method: "back" });
-    } catch {
-      alert("회원가입에 실패했습니다.");
+    } catch (err: any) {
+      toast(err.message);
     }
   };
 
