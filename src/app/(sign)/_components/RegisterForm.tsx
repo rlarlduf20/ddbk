@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { useFormStatus } from "react-dom";
-import { toast } from "react-toastify";
 
 import { css } from "../../../../styled-system/css";
 import { hstack, vstack } from "../../../../styled-system/patterns";
@@ -13,6 +12,7 @@ import LabelInput from "@/app/_components/LabelInput";
 import Typography from "@/app/_components/Typography";
 import useRouterEvent from "@/app/_hooks/useRouterEvent";
 import { handleClickDuplicateBtn } from "@/app/_lib/api-queryFn/auth";
+import { showToast } from "@/app/_lib/toast";
 
 const formStyles = vstack({
   gap: "30px",
@@ -90,7 +90,7 @@ const RegisterForm = () => {
 
       push({ method: "back" });
     } catch (err: any) {
-      toast(err.message);
+      showToast({ message: err.message, type: "error" });
     }
   };
 

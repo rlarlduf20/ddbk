@@ -1,7 +1,6 @@
 "use client";
 
 import { useAtom } from "jotai";
-import { toast } from "react-toastify";
 
 import LoginButton from "./LoginButton";
 import { vstack } from "../../../../styled-system/patterns";
@@ -10,6 +9,7 @@ import { loginWithCreds } from "@/app/_actions/auth";
 import { loginIdAtom, passwordAtom } from "@/app/_atoms";
 import LabelInput from "@/app/_components/LabelInput";
 import useRouterEvent from "@/app/_hooks/useRouterEvent";
+import { showToast } from "@/app/_lib/toast";
 
 const formStyles = vstack({
   gap: "12px",
@@ -30,7 +30,7 @@ const LoginForm = () => {
       //   TODO: 앱에서의 이동
       push({ path: "/", method: "reset" });
     } catch {
-      toast("로그인 정보를 다시 확인해주세요.");
+      showToast({ message: "로그인 정보를 확인해주세요.", type: "error" });
     }
   };
   return (
