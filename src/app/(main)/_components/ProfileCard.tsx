@@ -55,8 +55,6 @@ const profileProgressInnerBarStyles = css({
 const ProfileCard = async () => {
   const session = await auth();
 
-  const user = await getUser(session?.user?.id);
-
   if (!session) {
     return (
       <div className={profileCardStyles}>
@@ -64,6 +62,7 @@ const ProfileCard = async () => {
       </div>
     );
   }
+  const user = await getUser(session.user?.id);
 
   return (
     <div className={profileCardStyles}>

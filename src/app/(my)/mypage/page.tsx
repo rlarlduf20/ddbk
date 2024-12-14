@@ -4,19 +4,20 @@ import { useQuery } from "@tanstack/react-query";
 
 import Loading from "@/app/_components/Loading";
 import Typography from "@/app/_components/Typography";
+import { fetchUser } from "@/app/_lib/api-queryFn/user";
 
 const MyPage = () => {
-  const { data: user, isLoading } = useQuery({
+  const {
+    data: user,
+    isLoading,
+    error,
+  } = useQuery({
     queryKey: ["user-nickname"],
-    queryFn: async () => {
-      const res = await fetch("/api/user");
-      const data = await res.json();
-
-      return data;
-    },
+    queryFn: () => fetchUser(),
   });
 
   if (isLoading) return <Loading />;
+  if (error) throw new Error(error.message);
 
   return (
     <div style={{ paddingTop: "100px" }}>

@@ -10,10 +10,7 @@ export async function GET() {
     const user = await getUser(session?.user?.id);
 
     return NextResponse.json({ success: true, user });
-  } catch {
-    return NextResponse.json(
-      { error: "Failed to find user." },
-      { status: 500 },
-    );
+  } catch (error: any) {
+    return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }

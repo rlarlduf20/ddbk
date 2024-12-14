@@ -12,6 +12,7 @@ import LabelInput from "@/app/_components/LabelInput";
 import Typography from "@/app/_components/Typography";
 import useRouterEvent from "@/app/_hooks/useRouterEvent";
 import { handleClickDuplicateBtn } from "@/app/_lib/api-queryFn/auth";
+import { showToast } from "@/app/_lib/toast";
 
 const formStyles = vstack({
   gap: "30px",
@@ -87,11 +88,9 @@ const RegisterForm = () => {
       const formData = new FormData(e?.currentTarget);
       await registerWithCreds(formData);
 
-      alert("회원가입에 성공했습니다.");
-
       push({ method: "back" });
-    } catch {
-      alert("회원가입에 실패했습니다.");
+    } catch (err: any) {
+      showToast({ message: err.message, type: "error" });
     }
   };
 
