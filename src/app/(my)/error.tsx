@@ -11,6 +11,7 @@ export default function Error({
     <div>
       <h2>{error.message}</h2>
       <button
+        type="button"
         onClick={
           // Attempt to recover by trying to re-render the segment
           () => reset()
