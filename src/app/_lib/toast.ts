@@ -1,5 +1,7 @@
 import { toast, ToastOptions } from "react-toastify";
 
+import { css } from "../../../styled-system/css";
+
 interface ToastStatType {
   message: string;
   type: "success" | "error";
@@ -10,16 +12,18 @@ const defaultOption: ToastOptions = {
   autoClose: 2000,
 };
 
+const toastDefaultStyles = css({
+  top: "50px",
+  width: "300px",
+  margin: "0 auto",
+});
+
 export const showToast = ({ message, type }: ToastStatType) => {
   switch (type) {
     case "success": {
       return toast.success(message, {
         ...defaultOption,
-        style: {
-          width: "300px",
-          margin: "0 auto",
-          top: "50px",
-        },
+        className: toastDefaultStyles,
         progressStyle: {
           backgroundColor: "#536D64",
         },
@@ -28,11 +32,7 @@ export const showToast = ({ message, type }: ToastStatType) => {
     case "error": {
       return toast.error(message, {
         ...defaultOption,
-        style: {
-          width: "300px",
-          margin: "0 auto",
-          top: "50px",
-        },
+        className: toastDefaultStyles,
         progressStyle: {
           backgroundColor: "#F38074",
         },
