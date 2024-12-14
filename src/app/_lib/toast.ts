@@ -14,7 +14,10 @@ const defaultOption: ToastOptions = {
 
 const toastDefaultStyles = css({
   top: "50px",
-  width: "300px",
+  width: {
+    base: "calc(100% - 40px)",
+    sm: "300px",
+  },
   margin: "0 auto",
 });
 
