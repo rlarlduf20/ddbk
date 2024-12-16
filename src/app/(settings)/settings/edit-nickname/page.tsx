@@ -1,6 +1,5 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 import { css } from "../../../../../styled-system/css";
@@ -9,6 +8,7 @@ import { vstack } from "../../../../../styled-system/patterns";
 import AppBar from "@/app/_components/AppBar";
 import Button from "@/app/_components/Button";
 import LabelInput from "@/app/_components/LabelInput";
+import useRouterEvent from "@/app/_hooks/useRouterEvent";
 import { editNickname } from "@/app/_lib/api-queryFn/user";
 import { showToast } from "@/app/_lib/toast";
 
@@ -32,7 +32,7 @@ const buttonBoxStyles = css({
 });
 
 const EditNickNamePage = () => {
-  const router = useRouter();
+  const { push } = useRouterEvent();
 
   const [nickname, setNickname] = useState<string>("");
   const isCorrectLength = nickname.length >= 2 && nickname.length <= 6;
@@ -43,7 +43,7 @@ const EditNickNamePage = () => {
   const handleSubmitNickname = async () => {
     try {
       await editNickname(nickname);
-      router.push("/settings");
+      push({ method: "reset", path: "/" });
     } catch (error: any) {
       showToast({ type: "error", message: error.message });
     }
