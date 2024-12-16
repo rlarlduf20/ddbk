@@ -3,19 +3,24 @@ import GPSGroup from "../_components/GPSGroup";
 import ProfileCard from "../_components/Profile";
 import SignOutButton from "../_components/SignOutButtont";
 
+import AppBar from "@/app/_components/AppBar";
+
 const settingStyles = css({
   width: "100vw",
-  px: "20px",
+  // px: "20px",
 });
 
 const settingSectionStyles = css({
   width: "375px",
-  margin: "62px auto 0",
+  px: "20px",
+  margin: "0 auto",
+  mt: "20px",
 });
 
 const SettingPage = async () => {
   return (
     <div className={settingStyles}>
+      <AppBar>설정</AppBar>
       <section className={settingSectionStyles}>
         <ProfileCard />
         <GPSGroup />
