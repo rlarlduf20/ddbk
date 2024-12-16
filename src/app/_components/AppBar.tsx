@@ -1,5 +1,7 @@
 "use client";
 
+import { useRouter } from "next/navigation";
+
 import Typography from "./Typography";
 import { css } from "../../../styled-system/css";
 import useRouterEvent from "../_hooks/useRouterEvent";
@@ -8,6 +10,7 @@ import LeftArrowIcon from "@/assets/icons/LeftArrowIcon";
 
 interface Props {
   children: React.ReactNode;
+  stackPop?: boolean;
 }
 
 const statusBlankBarStyles = css({
@@ -25,10 +28,16 @@ const appBarStyles = css({
   alignItems: "center",
 });
 
-const AppBar = ({ children }: Props) => {
+const AppBar = ({ children, stackPop = true }: Props) => {
+  const router = useRouter();
   const { push } = useRouterEvent();
+
   const handleClick = () => {
-    push({ method: "back" });
+    if (stackPop) {
+      push({ method: "back" });
+    } else {
+      router.back();
+    }
   };
   return (
     <div style={{ width: "100%" }}>

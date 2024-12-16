@@ -42,7 +42,7 @@ const ProfileCard = async () => {
         <div className={profileImgStyles} />
         <Typography.H3>{user?.name}</Typography.H3>
       </div>
-      <Link href="/setting/edit-nickname">
+      <Link href="/settings/edit-nickname">
         <Typography.PMedium>닉네임 변경</Typography.PMedium>
       </Link>
     </div>
