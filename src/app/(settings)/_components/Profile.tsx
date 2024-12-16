@@ -13,7 +13,7 @@ const profileCardStyles = hstack({
 });
 
 const profileInfoStyles = hstack({
-  gap: "25.5px",
+  gap: "23px",
 });
 
 const profileImgStyles = css({
@@ -40,9 +40,11 @@ const ProfileCard = async () => {
     <div className={profileCardStyles}>
       <div className={profileInfoStyles}>
         <div className={profileImgStyles} />
-        <Typography.PMedium>{user?.name}</Typography.PMedium>
+        <Typography.H3>{user?.name}</Typography.H3>
       </div>
-      <Link href="/setting/edit-nickname">닉네임 변경</Link>
+      <Link href="/settings/edit-nickname">
+        <Typography.PMedium>닉네임 변경</Typography.PMedium>
+      </Link>
     </div>
   );
 };

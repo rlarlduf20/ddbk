@@ -2,7 +2,16 @@
 
 import { signOut } from "next-auth/react";
 
+import { css } from "../../../../styled-system/css";
+
 import { logOut } from "@/app/_actions/auth";
+import Typography from "@/app/_components/Typography";
+
+const logOutBtnStyles = css({
+  position: "absolute",
+  bottom: "104px",
+  cursor: "pointer",
+});
 
 const SignOutButton = () => {
   const handleLogOut = async () => {
@@ -18,8 +27,8 @@ const SignOutButton = () => {
 
   return (
     <div>
-      <button type="button" onClick={handleLogOut}>
-        로그아웃
+      <button type="button" onClick={handleLogOut} className={logOutBtnStyles}>
+        <Typography.PMedium>로그아웃</Typography.PMedium>
       </button>
     </div>
   );

@@ -1,71 +1,80 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 import { css } from "../../../../../styled-system/css";
 import { vstack } from "../../../../../styled-system/patterns";
 
+import AppBar from "@/app/_components/AppBar";
+import Button from "@/app/_components/Button";
+import LabelInput from "@/app/_components/LabelInput";
+import useRouterEvent from "@/app/_hooks/useRouterEvent";
+import { editNickname } from "@/app/_lib/api-queryFn/user";
+import { showToast } from "@/app/_lib/toast";
+
 const settingStyles = css({
   width: "100vw",
-  px: "20px",
 });
 
 const settingSectionStyles = css({
   width: "375px",
-  margin: "62px auto 0",
+  px: "20px",
+  margin: "0 auto",
 });
 
 const nicknameBoxStyles = vstack({
-  alignItems: "start",
+  mt: "26px",
 });
 
-const inputStyles = css({
-  pl: "10px",
-  border: "1px solid gray",
-  borderRadius: "6px",
-  width: "100%",
-  py: "5px",
-  mb: "150px",
-  outline: "none",
+const buttonBoxStyles = css({
+  position: "absolute",
+  bottom: "46px",
 });
 
 const EditNickNamePage = () => {
-  const router = useRouter();
+  const { push } = useRouterEvent();
 
   const [nickname, setNickname] = useState<string>("");
-
+  const isCorrectLength = nickname.length >= 2 && nickname.length <= 6;
   const handleChangeNickname = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNickname(e.target.value);
   };
-  const handleSubmitNickname = async () => {
-    await fetch("/api/user/edit-nickname", {
-      method: "POST",
-      body: JSON.stringify({
-        newNickname: nickname,
-      }),
-    });
 
-    router.push("/setting");
+  const handleSubmitNickname = async () => {
+    try {
+      await editNickname(nickname);
+      push({ method: "reset", path: "/" });
+    } catch (error: any) {
+      showToast({ type: "error", message: error.message });
+    }
   };
 
   return (
     <div className={settingStyles}>
+      <AppBar stackPop={false}>닉네임 변경</AppBar>
       <section className={settingSectionStyles}>
         <div className={nicknameBoxStyles}>
-          <label htmlFor="nickname">
-            닉네임
-            <input
-              id="nickname"
-              placeholder="닉네임을 입력해주세요."
-              className={inputStyles}
-              value={nickname}
-              onChange={handleChangeNickname}
-            />
-          </label>
-          <button type="button" onClick={handleSubmitNickname}>
+          <LabelInput
+            type="text"
+            id="nickname"
+            placeholder="아이디를 입력해주세요."
+            label="닉네임"
+            value={nickname}
+            handleChange={handleChangeNickname}
+            error={!isCorrectLength}
+            errorText="닉네임은 2 ~ 6 글자로 변경 가능합니다."
+          />
+        </div>
+        <div className={buttonBoxStyles}>
+          <Button
+            color={isCorrectLength ? "oddu_green01" : "oddu_black03"}
+            size="large"
+            type="submit"
+            disabled={!isCorrectLength}
+            handleClick={handleSubmitNickname}
+          >
             확인
-          </button>
+          </Button>
         </div>
       </section>
     </div>

@@ -12,7 +12,7 @@ export async function POST(request: Request) {
 
     if (!newNickname) {
       return NextResponse.json(
-        { error: "newNickname are required." },
+        { error: "새로운 닉네임 입력이 필요합니다." },
         { status: 400 },
       );
     }
@@ -25,7 +25,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ success: true, user });
   } catch {
     return NextResponse.json(
-      { error: "Failed to update nickname." },
+      { error: "닉네임 변경에 실패했습니다." },
       { status: 500 },
     );
   }
