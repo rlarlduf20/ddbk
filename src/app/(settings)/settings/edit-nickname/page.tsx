@@ -9,6 +9,8 @@ import { vstack } from "../../../../../styled-system/patterns";
 import AppBar from "@/app/_components/AppBar";
 import Button from "@/app/_components/Button";
 import LabelInput from "@/app/_components/LabelInput";
+import { editNickname } from "@/app/_lib/api-queryFn/user";
+import { showToast } from "@/app/_lib/toast";
 
 const settingStyles = css({
   width: "100vw",
@@ -39,14 +41,12 @@ const EditNickNamePage = () => {
   };
 
   const handleSubmitNickname = async () => {
-    await fetch("/api/user/edit-nickname", {
-      method: "POST",
-      body: JSON.stringify({
-        newNickname: nickname,
-      }),
-    });
-
-    router.push("/setting");
+    try {
+      await editNickname(nickname);
+      router.push("/settings");
+    } catch (error: any) {
+      showToast({ type: "error", message: error.message });
+    }
   };
 
   return (
