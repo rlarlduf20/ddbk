@@ -11,7 +11,9 @@ import useMap from "@/app/_hooks/useMap";
 
 const MapContainer = () => {
   const { isLoading, location } = useGeoLocation();
-  const { handleScriptLoad } = useMap({ location });
+  const { handleScriptLoad, disableAutoMove } = useMap({
+    location,
+  });
 
   const handleClickFinishBtn = () => {
     stopTracking();
@@ -37,7 +39,13 @@ const MapContainer = () => {
         onLoad={handleScriptLoad}
       />
       {isLoading && <Loading />}
-      <div id="map" style={{ width: "100vw", height: "100vh" }} />
+      <div>
+        <div
+          id="map"
+          style={{ width: "100vw", height: "100vh" }}
+          onTouchStart={disableAutoMove}
+        />
+      </div>
       <button
         type="button"
         onClick={handleClickFinishBtn}

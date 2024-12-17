@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { DEFAULT_ZOOM } from "../_constants/map";
 
@@ -21,8 +21,9 @@ const useMap = ({ location }: Props) => {
   const mapRef = useRef<naver.maps.Map | null>(null);
   const polylineRef = useRef<naver.maps.Polyline | null>(null);
   const curPosMarkerRef = useRef<naver.maps.Marker | null>(null);
-
   const footprintMarkerRef = useRef<naver.maps.Marker | null>(null);
+
+  const [isAutoMoveRef, setIsAutoMoveRef] = useState<boolean>(true);
 
   const handleScriptLoad = () => {
     const mapOptions = {
@@ -82,13 +83,14 @@ const useMap = ({ location }: Props) => {
     curPosMarkerRef.current?.setPosition(
       new naver.maps.LatLng(location.latitude, location.longitude),
     );
-
-    const newCenter = new naver.maps.LatLng(
-      location.latitude,
-      location.longitude,
-    );
-    mapRef.current.setCenter(newCenter);
-  }, [location]);
+    if (isAutoMoveRef) {
+      const newCenter = new naver.maps.LatLng(
+        location.latitude,
+        location.longitude,
+      );
+      mapRef.current.setCenter(newCenter);
+    }
+  }, [location, isAutoMoveRef]);
 
   const moveToCurLocation = () => {
     if (mapRef.current) {
@@ -98,7 +100,11 @@ const useMap = ({ location }: Props) => {
     }
   };
 
-  return { handleScriptLoad, moveToCurLocation };
+  const disableAutoMove = () => {
+    setIsAutoMoveRef(false); // 자동 이동 비활성화
+  };
+
+  return { handleScriptLoad, moveToCurLocation, disableAutoMove };
 };
 
 export default useMap;
