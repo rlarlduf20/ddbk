@@ -10,12 +10,14 @@ import { startTracking, stopTracking } from "../_lib/tracking";
 import Loading from "@/app/_components/Loading";
 import useGeoLocation from "@/app/_hooks/useGeolocation";
 import useMap from "@/app/_hooks/useMap";
+import useRouterEvent from "@/app/_hooks/useRouterEvent";
 import { saveFootPrint } from "@/app/_lib/api-queryFn/footprint";
 import { showToast } from "@/app/_lib/toast";
 import { FootprintType } from "@/app/_types/footprint";
 
 const MapContainer = () => {
   const { isLoading, location } = useGeoLocation();
+  const { push } = useRouterEvent();
   const [footprints, setFootprints] = useState<FootprintType[]>([]);
   const { handleScriptLoad, disableAutoMove } = useMap({
     location,
@@ -30,13 +32,7 @@ const MapContainer = () => {
     try {
       await saveFootPrint(footprints);
       stopTracking();
-      if (typeof window !== "undefined" && window.ReactNativeWebView) {
-        window.ReactNativeWebView.postMessage(
-          JSON.stringify({ type: "STACK_REVIEW" }),
-        );
-
-        return;
-      }
+      push({ method: "reset", path: "/review" });
     } catch (error: any) {
       showToast({ type: "error", message: error.message });
     }
