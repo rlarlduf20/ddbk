@@ -1,15 +1,20 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { DEFAULT_ZOOM } from "../_constants/map";
+import { FootprintType } from "../_types/footprint";
 
 interface Props {
   location: { latitude: number; longitude: number };
+  footprints: FootprintType[];
 }
 
-const useMap = ({ location }: Props) => {
+const useMap = ({ location, footprints }: Props) => {
   const mapRef = useRef<naver.maps.Map | null>(null);
   const polylineRef = useRef<naver.maps.Polyline | null>(null);
   const curPosMarkerRef = useRef<naver.maps.Marker | null>(null);
+  const footprintMarkerRef = useRef<naver.maps.Marker | null>(null);
+
+  const [isAutoMoveRef, setIsAutoMoveRef] = useState<boolean>(true);
 
   const handleScriptLoad = () => {
     const mapOptions = {
@@ -49,13 +54,33 @@ const useMap = ({ location }: Props) => {
     curPosMarkerRef.current?.setPosition(
       new naver.maps.LatLng(location.latitude, location.longitude),
     );
+    if (isAutoMoveRef) {
+      const newCenter = new naver.maps.LatLng(
+        location.latitude,
+        location.longitude,
+      );
+      mapRef.current.setCenter(newCenter);
+    }
+    footprints.forEach((footprint: any) => {
+      if (!mapRef.current) return;
 
-    const newCenter = new naver.maps.LatLng(
-      location.latitude,
-      location.longitude,
-    );
-    mapRef.current.setCenter(newCenter);
-  }, [location]);
+      footprintMarkerRef.current = new naver.maps.Marker({
+        position: new naver.maps.LatLng(
+          footprint.latitude,
+          footprint.longitude,
+        ),
+        map: mapRef.current,
+        title: footprint.title,
+        icon: {
+          url: "/marker-footprint.svg",
+          size: new naver.maps.Size(50, 63),
+          scaledSize: new naver.maps.Size(50, 63),
+          origin: new naver.maps.Point(0, 0),
+          anchor: new naver.maps.Point(12, 37),
+        },
+      });
+    });
+  }, [location, isAutoMoveRef, footprints]);
 
   const moveToCurLocation = () => {
     if (mapRef.current) {
@@ -65,7 +90,11 @@ const useMap = ({ location }: Props) => {
     }
   };
 
-  return { handleScriptLoad, moveToCurLocation };
+  const disableAutoMove = () => {
+    setIsAutoMoveRef(false); // 자동 이동 비활성화
+  };
+
+  return { handleScriptLoad, moveToCurLocation, disableAutoMove };
 };
 
 export default useMap;

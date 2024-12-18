@@ -7,7 +7,7 @@ const withAuthRoutes = [
   "/mypage",
   "/friends",
   "/setting",
-  "/tracking",
+  // "/tracking",
   "/review",
 ];
 

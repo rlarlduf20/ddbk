@@ -1,5 +1,6 @@
 "use client";
 
+import { useQuery } from "@tanstack/react-query";
 import Script from "next/script";
 
 import WorkButtonGroup from "./WorkButtonGroup";
@@ -7,10 +8,26 @@ import WorkButtonGroup from "./WorkButtonGroup";
 import Loading from "@/app/_components/Loading";
 import useGeoLocation from "@/app/_hooks/useGeolocation";
 import useMap from "@/app/_hooks/useMap";
+import { fetchMyFootPrints } from "@/app/_lib/api-queryFn/footprint";
 
 const MapContainer = () => {
   const { location, isLoading } = useGeoLocation();
-  const { handleScriptLoad, moveToCurLocation } = useMap({ location });
+  const {
+    data: footprints,
+    isLoading: isFetchLoading,
+    error,
+  } = useQuery({
+    queryKey: ["footprints"],
+    queryFn: () => fetchMyFootPrints(),
+  });
+
+  const { handleScriptLoad, moveToCurLocation } = useMap({
+    location,
+    footprints,
+  });
+
+  if (isFetchLoading) return <Loading />;
+  if (error) throw new Error(error.message);
 
   return (
     <>

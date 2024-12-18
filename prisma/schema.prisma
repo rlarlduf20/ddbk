@@ -17,6 +17,7 @@ model User {
   sessions      Session[]
   loginId       String?         @unique
   password      String?
+  footprints    Footprint[]
  
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -59,4 +60,14 @@ model VerificationToken {
   expires    DateTime
  
   @@id([identifier, token])
+}
+
+model Footprint {
+  id  String  @id @default(cuid())
+  title String
+  content  String?
+  latitude  Float
+  longitude  Float
+  userId  String
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
