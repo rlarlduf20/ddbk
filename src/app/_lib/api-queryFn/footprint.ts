@@ -1,9 +1,4 @@
-interface ParamsType {
-  latitude: number;
-  longitude: number;
-  title: string;
-  content?: string;
-}
+import { FootprintType } from "@/app/_types/footprint";
 
 export const fetchMyFootPrints = async () => {
   try {
@@ -22,7 +17,7 @@ export const saveFootPrint = async ({
   longitude,
   title,
   content,
-}: ParamsType) => {
+}: FootprintType) => {
   const res = await fetch("/api/footprint", {
     method: "POST",
     body: JSON.stringify({

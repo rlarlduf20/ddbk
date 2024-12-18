@@ -1,16 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 
 import { DEFAULT_ZOOM } from "../_constants/map";
+import { FootprintType } from "../_types/footprint";
 
-interface FootPrintsType {
-  title: string;
-  latitude: number;
-  longitude: number;
-  content?: string;
-}
 interface Props {
   location: { latitude: number; longitude: number };
-  footprints: FootPrintsType[];
+  footprints: FootprintType[];
 }
 
 const useMap = ({ location, footprints }: Props) => {
