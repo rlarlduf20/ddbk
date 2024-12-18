@@ -1,8 +1,9 @@
 "use client";
 
 import Script from "next/script";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
+import SaveFootPrintButton from "./SaveFootPrintButton";
 import { startTracking, stopTracking } from "../_lib/tracking";
 
 import Loading from "@/app/_components/Loading";
@@ -11,8 +12,10 @@ import useMap from "@/app/_hooks/useMap";
 
 const MapContainer = () => {
   const { isLoading, location } = useGeoLocation();
+  const [footprints, setFootprints] = useState([]);
   const { handleScriptLoad, disableAutoMove } = useMap({
     location,
+    footprints,
   });
 
   const handleClickFinishBtn = () => {
@@ -63,6 +66,7 @@ const MapContainer = () => {
       >
         산책 끝
       </button>
+      <SaveFootPrintButton />
     </>
   );
 };

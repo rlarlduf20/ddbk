@@ -1,5 +1,3 @@
-"use client";
-
 import { css } from "../../../../styled-system/css";
 
 import Button from "@/app/_components/Button";
