@@ -30,26 +30,6 @@ const useMap = ({ location, footprints }: Props) => {
       strokeWeight: 5,
     });
 
-    footprints.forEach((footprint: any) => {
-      if (!mapRef.current) return;
-
-      footprintMarkerRef.current = new naver.maps.Marker({
-        position: new naver.maps.LatLng(
-          footprint.latitude,
-          footprint.longitude,
-        ),
-        map: mapRef.current,
-        title: footprint.name,
-        icon: {
-          url: "/marker-footprint.svg",
-          size: new naver.maps.Size(50, 63),
-          scaledSize: new naver.maps.Size(50, 63),
-          origin: new naver.maps.Point(0, 0),
-          anchor: new naver.maps.Point(12, 37),
-        },
-      });
-    });
-
     curPosMarkerRef.current = new naver.maps.Marker({
       position: new naver.maps.LatLng(location.latitude, location.longitude),
       map: mapRef.current,
@@ -81,7 +61,26 @@ const useMap = ({ location, footprints }: Props) => {
       );
       mapRef.current.setCenter(newCenter);
     }
-  }, [location, isAutoMoveRef]);
+    footprints.forEach((footprint: any) => {
+      if (!mapRef.current) return;
+
+      footprintMarkerRef.current = new naver.maps.Marker({
+        position: new naver.maps.LatLng(
+          footprint.latitude,
+          footprint.longitude,
+        ),
+        map: mapRef.current,
+        title: footprint.title,
+        icon: {
+          url: "/marker-footprint.svg",
+          size: new naver.maps.Size(50, 63),
+          scaledSize: new naver.maps.Size(50, 63),
+          origin: new naver.maps.Point(0, 0),
+          anchor: new naver.maps.Point(12, 37),
+        },
+      });
+    });
+  }, [location, isAutoMoveRef, footprints]);
 
   const moveToCurLocation = () => {
     if (mapRef.current) {

@@ -12,20 +12,10 @@ export const fetchMyFootPrints = async () => {
   }
 };
 
-export const saveFootPrint = async ({
-  latitude,
-  longitude,
-  title,
-  content,
-}: FootprintType) => {
+export const saveFootPrint = async (footprints: FootprintType[]) => {
   const res = await fetch("/api/footprint", {
     method: "POST",
-    body: JSON.stringify({
-      title,
-      content,
-      latitude,
-      longitude,
-    }),
+    body: JSON.stringify({ footprints }),
   });
   const data = await res.json();
 

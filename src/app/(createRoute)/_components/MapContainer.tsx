@@ -4,35 +4,49 @@ import Script from "next/script";
 import { useEffect, useState } from "react";
 
 import SaveFootPrintButton from "./SaveFootPrintButton";
+import TrackingControlButton from "./TrackingControlButton";
 import { startTracking, stopTracking } from "../_lib/tracking";
 
 import Loading from "@/app/_components/Loading";
 import useGeoLocation from "@/app/_hooks/useGeolocation";
 import useMap from "@/app/_hooks/useMap";
+import { saveFootPrint } from "@/app/_lib/api-queryFn/footprint";
+import { showToast } from "@/app/_lib/toast";
+import { FootprintType } from "@/app/_types/footprint";
 
 const MapContainer = () => {
   const { isLoading, location } = useGeoLocation();
-  const [footprints, setFootprints] = useState([]);
+  const [footprints, setFootprints] = useState<FootprintType[]>([]);
   const { handleScriptLoad, disableAutoMove } = useMap({
     location,
     footprints,
   });
 
-  const handleClickFinishBtn = () => {
-    stopTracking();
-    if (typeof window !== "undefined" && window.ReactNativeWebView) {
-      window.ReactNativeWebView.postMessage(
-        JSON.stringify({ type: "STACK_REVIEW" }),
-      );
-
-      return;
-    }
-    alert("산책 끝은 앱에서 사용할 수 있습니다.");
-  };
-
   useEffect(() => {
     startTracking();
   }, []);
+
+  const handleClickFinishBtn = async () => {
+    try {
+      await saveFootPrint(footprints);
+      stopTracking();
+      if (typeof window !== "undefined" && window.ReactNativeWebView) {
+        window.ReactNativeWebView.postMessage(
+          JSON.stringify({ type: "STACK_REVIEW" }),
+        );
+
+        return;
+      }
+    } catch (error: any) {
+      showToast({ type: "error", message: error.message });
+    }
+
+    alert("산책 끝은 앱에서 사용할 수 있습니다.");
+  };
+
+  const handleSaveFootprints = (newFootprint: FootprintType) => {
+    setFootprints((prevFootprints) => [...prevFootprints, newFootprint]);
+  };
 
   return (
     <>
@@ -49,24 +63,17 @@ const MapContainer = () => {
           onTouchStart={disableAutoMove}
         />
       </div>
-      <button
-        type="button"
-        onClick={handleClickFinishBtn}
-        style={{
-          margin: "20px",
-          position: "fixed",
-          left: 50,
-          top: 50,
-          zIndex: 1000,
-          backgroundColor: "white",
-          padding: "10px 20px",
-          borderRadius: "5px",
-          boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.2)",
-        }}
-      >
-        산책 끝
-      </button>
-      <SaveFootPrintButton />
+      <TrackingControlButton handleClickFinishBtn={handleClickFinishBtn} />
+      <SaveFootPrintButton
+        handleSave={(title: string) =>
+          handleSaveFootprints({
+            title,
+            latitude: location.latitude,
+            longitude: location.longitude,
+            content: "테스트",
+          })
+        }
+      />
     </>
   );
 };
