@@ -5,6 +5,18 @@ interface ParamsType {
   content?: string;
 }
 
+export const fetchMyFootPrints = async () => {
+  try {
+    const res = await fetch("/api/footprint");
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error);
+
+    return data;
+  } catch (e: any) {
+    throw new Error(e.message);
+  }
+};
+
 export const saveFootPrint = async ({
   latitude,
   longitude,

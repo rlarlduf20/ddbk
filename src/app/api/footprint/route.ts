@@ -3,6 +3,28 @@ import { NextResponse } from "next/server";
 import { auth } from "@/auth";
 import { prisma } from "@/prisma";
 
+export async function GET() {
+  try {
+    const session = await auth();
+
+    // Prisma를 사용하여 footprints 조회
+    const userWithFootprints = await prisma.user.findUnique({
+      where: { id: session?.user?.id },
+      include: { footprints: true },
+    });
+
+    if (!userWithFootprints) {
+      return NextResponse.json({ message: "User not found" }, { status: 404 });
+    }
+
+    return NextResponse.json(userWithFootprints.footprints);
+  } catch {
+    return NextResponse.json(
+      { message: "Failed to fetch footprints" },
+      { status: 500 },
+    );
+  }
+}
 export async function POST(req: Request) {
   try {
     const session = await auth();
