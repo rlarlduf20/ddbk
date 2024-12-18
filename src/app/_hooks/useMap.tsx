@@ -8,10 +8,6 @@ interface Props {
 
 const footprints = [
   {
-    title: "웩슨 출몰 지역",
-    position: { latitude: 37.5, longitude: 126.97 },
-  },
-  {
     title: "경복궁 카페",
     position: { latitude: 37.579293849225, longitude: 126.97798076343 },
   },
