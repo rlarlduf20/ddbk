@@ -68,6 +68,6 @@ model Footprint {
   content  String?
   latitude  Float
   longitude  Float
-  userId  string
+  userId  String
   user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
