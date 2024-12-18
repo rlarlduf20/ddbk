@@ -65,6 +65,7 @@ model VerificationToken {
 model Footprint {
   id  String  @id @default(cuid())
   title String
+  content  String?
   latitude  Float
   longitude  Float
   userId  string
