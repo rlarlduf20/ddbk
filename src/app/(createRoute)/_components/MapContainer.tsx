@@ -51,7 +51,7 @@ const MapContainer = () => {
         src={`https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${process.env.NEXT_PUBLIC_NAVER_MAP_CLIENT_ID}`}
         onLoad={handleScriptLoad}
       />
-      {isLoading && <Loading />}
+      {isLoading && <Loading>위치 정보를 불러오는 중입니다.</Loading>}
       <div>
         <div
           id="map"
