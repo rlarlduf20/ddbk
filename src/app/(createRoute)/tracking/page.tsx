@@ -5,18 +5,18 @@ import { useState } from "react";
 import MapContainer from "../_components/MapContainer";
 import NoticeContainer from "../_components/NoticeContainer";
 import TimerContainer from "../_components/TimerContainer";
-
-type TrackingPhaseTypes = "notice" | "timer" | "tracking";
+import { TrackingPhaseTypes } from "../_types/trackingPhase";
 
 const Tracking = () => {
   const [trackingPhase, setTrackingPhase] =
     useState<TrackingPhaseTypes>("notice");
 
-  const changeTrackingPhase = (step: TrackingPhaseTypes) => {
-    setTrackingPhase(step);
+  const changeTrackingPhase = (phase: TrackingPhaseTypes) => {
+    setTrackingPhase(phase);
   };
 
-  if (trackingPhase === "notice") return <NoticeContainer />;
+  if (trackingPhase === "notice")
+    return <NoticeContainer changeTrackingPhase={changeTrackingPhase} />;
   if (trackingPhase === "timer") return <TimerContainer />;
 
   return <MapContainer />;
