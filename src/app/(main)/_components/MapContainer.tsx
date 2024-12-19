@@ -12,14 +12,18 @@ import { fetchMyFootPrints } from "@/app/_lib/api-queryFn/footprint";
 
 const MapContainer = () => {
   const { location, isLoading } = useGeoLocation();
-  const { data: footprints, error } = useQuery({
+  const {
+    data: footprints,
+    isLoading: isFetchLoading,
+    error,
+  } = useQuery({
     queryKey: ["footprints"],
     queryFn: () => fetchMyFootPrints(),
   });
 
   const { handleScriptLoad, moveToCurLocation } = useMap({
     location,
-    footprints,
+    footprints: footprints || [],
   });
 
   if (error) throw new Error(error.message);
@@ -31,7 +35,9 @@ const MapContainer = () => {
         src={`https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${process.env.NEXT_PUBLIC_NAVER_MAP_CLIENT_ID}`}
         onLoad={handleScriptLoad}
       />
-      {isLoading && <Loading>위치 정보를 불러오는 중입니다.</Loading>}
+      {(isLoading || isFetchLoading) && (
+        <Loading>위치 및 지도 정보를 불러오는 중입니다.</Loading>
+      )}
       <div id="map" style={{ width: "100vw", height: "100vh" }} />
       <WorkButtonGroup moveCurLocation={moveToCurLocation} />
     </>

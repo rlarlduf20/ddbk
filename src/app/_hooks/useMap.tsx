@@ -37,7 +37,8 @@ const useMap = ({ location, footprints }: Props) => {
   };
 
   useEffect(() => {
-    if (!mapRef.current || typeof naver === "undefined") return;
+    if (!mapRef.current || typeof naver === "undefined" || !footprints.length)
+      return;
     if (!polylineRef.current) return;
 
     const currentPath: naver.maps.Point[] = [];
@@ -49,7 +50,7 @@ const useMap = ({ location, footprints }: Props) => {
       ...currentPath,
       new naver.maps.LatLng(location.latitude, location.longitude), // 새 위치 추가
     ];
-    polylineRef.current.setPath(newPath);
+    if (footprints.length === 0) polylineRef.current.setPath(newPath);
 
     curPosMarkerRef.current?.setPosition(
       new naver.maps.LatLng(location.latitude, location.longitude),
