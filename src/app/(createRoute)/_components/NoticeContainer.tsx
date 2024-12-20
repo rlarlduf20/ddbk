@@ -25,6 +25,7 @@ const noticeSectionStyles = css({
 const buttonStyles = css({
   position: "absolute",
   bottom: "40px",
+  color: "oddu_white01",
 });
 
 const NoticeContainer = ({ changeTrackingPhase }: Props) => {
@@ -58,7 +59,7 @@ const NoticeContainer = ({ changeTrackingPhase }: Props) => {
             color={isDisabledReady ? "oddu_black03" : "oddu_green01"}
             size="large"
             handleClick={() => changeTrackingPhase("timer")}
-            disabled={!isWebView || isDisabledReady}
+            // disabled={!isWebView || isDisabledReady}
           >
             시작하기
           </Button>

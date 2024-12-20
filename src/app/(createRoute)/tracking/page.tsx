@@ -17,7 +17,8 @@ const Tracking = () => {
 
   if (trackingPhase === "notice")
     return <NoticeContainer changeTrackingPhase={changeTrackingPhase} />;
-  if (trackingPhase === "timer") return <TimerContainer />;
+  if (trackingPhase === "timer")
+    return <TimerContainer changeTrackingPhase={changeTrackingPhase} />;
 
   return <MapContainer />;
 };
