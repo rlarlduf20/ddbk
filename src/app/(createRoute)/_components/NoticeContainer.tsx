@@ -30,11 +30,13 @@ const NoticeContainer = ({ changeTrackingPhase }: Props) => {
   const { isPossibleLocationService, isPossiblePermissions } =
     usePermissionState();
 
+  const isDisabledReady = !isPossibleLocationService || !isPossiblePermissions;
+
   return (
     <div className={noticeContainerStyles}>
       <AppBar>산책</AppBar>
       <div className={noticeSectionStyles}>
-        {(!isPossibleLocationService || !isPossiblePermissions) && (
+        {isDisabledReady && (
           <Typography.PMedium>
             위치 권한이 필요합니다.
             <br />
@@ -43,9 +45,10 @@ const NoticeContainer = ({ changeTrackingPhase }: Props) => {
         )}
         <div className={buttonStyles}>
           <Button
-            color="oddu_green01"
+            color={isDisabledReady ? "oddu_black03" : "oddu_green01"}
             size="large"
             handleClick={() => changeTrackingPhase("timer")}
+            disabled={isDisabledReady}
           >
             시작하기
           </Button>
