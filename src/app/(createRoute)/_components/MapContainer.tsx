@@ -1,6 +1,7 @@
 import Script from "next/script";
 import { useEffect, useState } from "react";
 
+import CurLocationButton from "./CurLocationButton";
 import SaveFootPrintButton from "./SaveFootPrintButton";
 import TrackingControlButton from "./TrackingControlButton";
 import { startTracking, stopTracking } from "../_lib/tracking";
@@ -17,7 +18,7 @@ const MapContainer = () => {
   const { isLoading, location } = useGeoLocation();
   const { push } = useRouterEvent();
   const [footprints, setFootprints] = useState<FootprintType[]>([]);
-  const { handleScriptLoad, disableAutoMove } = useMap({
+  const { handleScriptLoad, disableAutoMove, moveToCurLocation } = useMap({
     location,
     footprints,
   });
@@ -68,6 +69,9 @@ const MapContainer = () => {
           })
         }
       />
+      <div>
+        <CurLocationButton moveCurLocation={moveToCurLocation} />
+      </div>
     </>
   );
 };

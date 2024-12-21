@@ -9,7 +9,7 @@ interface Props {
 const saveFootPrintButton = css({
   position: "absolute",
   right: "20px",
-  bottom: "150px",
+  bottom: "106px",
 });
 
 const SaveFootPrintButton = ({ handleSave }: Props) => {

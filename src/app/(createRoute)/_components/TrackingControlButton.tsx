@@ -8,7 +8,9 @@ interface Props {
 
 const controlButtonBoxStyles = css({
   position: "absolute",
-  bottom: "60px",
+  bottom: "30px",
+  left: "50%",
+  transform: "translate(-50%, 0)",
 });
 
 const TrackingControlButton = ({ handleClickFinishBtn }: Props) => {
