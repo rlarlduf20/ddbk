@@ -33,6 +33,17 @@ const useMap = ({ location, footprints }: Props) => {
     curPosMarkerRef.current = new naver.maps.Marker({
       position: new naver.maps.LatLng(location.latitude, location.longitude),
       map: mapRef.current,
+      icon: {
+        content: `<div style="
+              width: 24px;
+              height: 24px;
+              background-color: #536D64;
+              border-radius: 50%;
+              box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+            "></div>`,
+        size: new naver.maps.Size(24, 24),
+        anchor: new naver.maps.Point(12, 12),
+      },
     });
   };
 
