@@ -13,11 +13,6 @@ interface Props {
   stackPop?: boolean;
 }
 
-const statusBlankBarStyles = css({
-  width: "100%",
-  height: "54px",
-});
-
 const appBarStyles = css({
   width: "375px",
   height: "51px",
@@ -41,7 +36,6 @@ const AppBar = ({ children, stackPop = true }: Props) => {
   };
   return (
     <div style={{ width: "100%" }}>
-      <div className={statusBlankBarStyles} />
       <div className={appBarStyles}>
         <button type="button" onClick={handleClick}>
           <LeftArrowIcon fill="#333" />

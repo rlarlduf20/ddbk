@@ -8,7 +8,7 @@ import Logo from "@/assets/images/logo-1st.png";
 
 const signContainerStyles = vstack({
   width: "100%",
-  mt: "256px",
+  mt: "202px",
   gap: "147px",
   justifyContent: "center",
 });
