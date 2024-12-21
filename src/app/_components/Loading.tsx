@@ -1,4 +1,8 @@
-const Loading = () => {
+interface Props {
+  children: React.ReactNode;
+}
+
+const Loading = ({ children }: Props) => {
   return (
     <div
       style={{
@@ -22,7 +26,7 @@ const Loading = () => {
           textAlign: "center",
         }}
       >
-        로딩중...
+        {children}
       </p>
     </div>
   );

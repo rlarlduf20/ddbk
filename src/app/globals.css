@@ -1,6 +1,5 @@
 @layer reset, base, tokens, recipes, utilities;
 @layer base {
-  html,
   body {
     background-color: #f0f0ee;
   }

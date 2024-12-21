@@ -1,8 +1,6 @@
 import { css } from "../../../../styled-system/css";
 
 import Button from "@/app/_components/Button";
-// import { saveFootPrint } from "@/app/_lib/api-queryFn/footprint";
-// import { showToast } from "@/app/_lib/toast";
 
 interface Props {
   handleSave: (title: string) => void;
@@ -11,7 +9,7 @@ interface Props {
 const saveFootPrintButton = css({
   position: "absolute",
   right: "20px",
-  bottom: "150px",
+  bottom: "106px",
 });
 
 const SaveFootPrintButton = ({ handleSave }: Props) => {

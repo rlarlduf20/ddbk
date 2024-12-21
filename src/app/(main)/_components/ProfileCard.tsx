@@ -10,7 +10,7 @@ import { auth } from "@/auth";
 
 const profileCardStyles = hstack({
   width: { base: "100vw", sm: "562.5px" },
-  height: "200px",
+  height: "146px",
   position: "fixed",
   zIndex: 1000,
   top: 0,

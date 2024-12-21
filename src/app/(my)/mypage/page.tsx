@@ -16,7 +16,7 @@ const MyPage = () => {
     queryFn: () => fetchUser(),
   });
 
-  if (isLoading) return <Loading />;
+  if (isLoading) return <Loading>내 정보를 불러오는 중입니다.</Loading>;
   if (error) throw new Error(error.message);
 
   return (

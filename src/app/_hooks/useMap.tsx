@@ -14,7 +14,7 @@ const useMap = ({ location, footprints }: Props) => {
   const curPosMarkerRef = useRef<naver.maps.Marker | null>(null);
   const footprintMarkerRef = useRef<naver.maps.Marker | null>(null);
 
-  const [isAutoMoveRef, setIsAutoMoveRef] = useState<boolean>(true);
+  const [isAutoMove, setIsAutoMove] = useState<boolean>(true);
 
   const handleScriptLoad = () => {
     const mapOptions = {
@@ -33,6 +33,17 @@ const useMap = ({ location, footprints }: Props) => {
     curPosMarkerRef.current = new naver.maps.Marker({
       position: new naver.maps.LatLng(location.latitude, location.longitude),
       map: mapRef.current,
+      icon: {
+        content: `<div style="
+              width: 24px;
+              height: 24px;
+              background-color: #536D64;
+              border-radius: 50%;
+              box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+            "></div>`,
+        size: new naver.maps.Size(24, 24),
+        anchor: new naver.maps.Point(12, 12),
+      },
     });
   };
 
@@ -54,13 +65,16 @@ const useMap = ({ location, footprints }: Props) => {
     curPosMarkerRef.current?.setPosition(
       new naver.maps.LatLng(location.latitude, location.longitude),
     );
-    if (isAutoMoveRef) {
+    if (isAutoMove) {
       const newCenter = new naver.maps.LatLng(
         location.latitude,
         location.longitude,
       );
       mapRef.current.setCenter(newCenter);
     }
+  }, [location, isAutoMove]);
+
+  useEffect(() => {
     footprints.forEach((footprint: any) => {
       if (!mapRef.current) return;
 
@@ -80,7 +94,7 @@ const useMap = ({ location, footprints }: Props) => {
         },
       });
     });
-  }, [location, isAutoMoveRef, footprints]);
+  }, [footprints]);
 
   const moveToCurLocation = () => {
     if (mapRef.current) {
@@ -91,7 +105,7 @@ const useMap = ({ location, footprints }: Props) => {
   };
 
   const disableAutoMove = () => {
-    setIsAutoMoveRef(false); // 자동 이동 비활성화
+    setIsAutoMove(false); // 자동 이동 비활성화
   };
 
   return { handleScriptLoad, moveToCurLocation, disableAutoMove };

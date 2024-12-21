@@ -8,6 +8,7 @@ export async function GET() {
   try {
     const session = await auth();
 
+    if (!session) return NextResponse.json([]);
     // Prisma를 사용하여 footprints 조회
     const userWithFootprints = await prisma.user.findUnique({
       where: { id: session?.user?.id },
