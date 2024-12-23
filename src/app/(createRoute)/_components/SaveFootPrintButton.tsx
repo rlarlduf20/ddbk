@@ -1,15 +1,24 @@
-import { css } from "../../../../styled-system/css";
+import { hstack } from "../../../../styled-system/patterns";
 
-import Button from "@/app/_components/Button";
+import FootIcon from "@/assets/icons/FootIcon";
 
 interface Props {
   handleSave: (title: string) => void;
 }
 
-const saveFootPrintButton = css({
+const saveButtonStyles = hstack({
+  width: "64px",
+  height: "64px",
+  bgColor: "oddu_green01",
+  color: "oddu_white01",
+  alignItems: "center",
+  justifyContent: "center",
+  zIndex: 1000,
+  borderRadius: "10px",
+  cursor: "pointer",
   position: "absolute",
   right: "20px",
-  bottom: "106px",
+  bottom: "120px",
 });
 
 const SaveFootPrintButton = ({ handleSave }: Props) => {
@@ -21,11 +30,13 @@ const SaveFootPrintButton = ({ handleSave }: Props) => {
   };
 
   return (
-    <div className={saveFootPrintButton}>
-      <Button color="oddu_black03" handleClick={handleClickSaveButton}>
-        발자국 찍기
-      </Button>
-    </div>
+    <button
+      type="button"
+      className={saveButtonStyles}
+      onClick={handleClickSaveButton}
+    >
+      <FootIcon size="42.67" />
+    </button>
   );
 };
 

@@ -69,9 +69,7 @@ const MapContainer = () => {
           })
         }
       />
-      <div>
-        <CurLocationButton moveCurLocation={moveToCurLocation} />
-      </div>
+      <CurLocationButton moveCurLocation={moveToCurLocation} />
     </>
   );
 };

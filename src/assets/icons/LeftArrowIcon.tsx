@@ -12,7 +12,7 @@ const LeftArrowIcon = ({ fill = "#F0F0EE", size = "24" }: Props) => {
       version="1.1"
       width={size}
       height={size}
-      viewBox={`0 0 ${size} ${size}`}
+      viewBox="0 0 24 24"
     >
       <defs>
         <clipPath id="master_svg0_3_5492">
