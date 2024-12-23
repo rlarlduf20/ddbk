@@ -1,10 +1,9 @@
+import { useSetAtom } from "jotai";
+
 import { hstack } from "../../../../styled-system/patterns";
 
+import { isDrawerOpenAtom } from "@/app/_atoms";
 import FootIcon from "@/assets/icons/FootIcon";
-
-interface Props {
-  handleSave: (title: string) => void;
-}
 
 const saveButtonStyles = hstack({
   width: "64px",
@@ -21,19 +20,18 @@ const saveButtonStyles = hstack({
   bottom: "120px",
 });
 
-const SaveFootPrintButton = ({ handleSave }: Props) => {
-  const handleClickSaveButton = async () => {
-    const title = prompt("발도장의 제목을 지어주세요");
-    if (title) {
-      handleSave(title);
-    }
+const SaveFootPrintButton = () => {
+  const setDrawerStatus = useSetAtom(isDrawerOpenAtom);
+
+  const handleClickOpenDrawer = async () => {
+    setDrawerStatus(true);
   };
 
   return (
     <button
       type="button"
       className={saveButtonStyles}
-      onClick={handleClickSaveButton}
+      onClick={handleClickOpenDrawer}
     >
       <FootIcon size="42.67" />
     </button>

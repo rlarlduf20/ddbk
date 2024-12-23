@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 
-import FootprintDrawer from "../_components/FootprintDrawer";
 import MapContainer from "../_components/MapContainer";
 import NoticeContainer from "../_components/NoticeContainer";
 import TimerContainer from "../_components/TimerContainer";
@@ -21,12 +20,7 @@ const Tracking = () => {
   if (trackingPhase === "timer")
     return <TimerContainer changeTrackingPhase={changeTrackingPhase} />;
 
-  return (
-    <>
-      <MapContainer />
-      <FootprintDrawer />
-    </>
-  );
+  return <MapContainer />;
 };
 
 export default Tracking;
