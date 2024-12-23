@@ -35,8 +35,9 @@ const drawerSectionBaseStyles = css({
 });
 
 const drawerSectionOpenStyles = css({
-  transform: "translateY(0)", // Drawer가 열릴 때
+  transform: "translateY(0)",
 });
+
 const drawerStyles = css({
   padding: "20px",
   display: "flex",
@@ -56,11 +57,13 @@ const FootprintDrawer = ({ handleSave }: Props) => {
   };
   return (
     <>
-      <div
-        role="presentation"
-        onClick={() => setDrawerState(false)}
-        className={overlayStyles}
-      />
+      {drawerState && (
+        <div
+          role="presentation"
+          onClick={() => setDrawerState(false)}
+          className={overlayStyles}
+        />
+      )}
       <div
         className={cx(
           drawerSectionBaseStyles,
