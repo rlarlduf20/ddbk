@@ -12,7 +12,7 @@ import CloseIcon from "@/assets/icons/CloseIcon";
 import PenIcon from "@/assets/icons/PenIcon";
 
 interface Props {
-  handleSave: (title: string) => void;
+  handleSave: (title: string, content: string) => void;
 }
 
 const overlayStyles = css({
@@ -117,7 +117,7 @@ const FootprintDrawer = ({ handleSave }: Props) => {
 
   const handleClickSaveButton = () => {
     if (title) {
-      handleSave(title);
+      handleSave(title, content);
     }
   };
   return (

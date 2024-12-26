@@ -64,12 +64,12 @@ const MapContainer = () => {
       <SaveFootPrintButton />
       <CurLocationButton moveCurLocation={moveToCurLocation} />
       <FootprintDrawer
-        handleSave={(title: string) =>
+        handleSave={(title: string, content: string) =>
           handleSaveFootprints({
             title,
             latitude: location.latitude,
             longitude: location.longitude,
-            content: "테스트",
+            content,
           })
         }
       />
