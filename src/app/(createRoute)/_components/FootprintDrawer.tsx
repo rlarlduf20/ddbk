@@ -10,6 +10,7 @@ import Typography from "@/app/_components/Typography";
 import CameraIcon from "@/assets/icons/CameraIcon";
 import CloseIcon from "@/assets/icons/CloseIcon";
 import PenIcon from "@/assets/icons/PenIcon";
+import { showToast } from "@/app/_lib/toast";
 
 interface Props {
   handleSave: (title: string, content: string) => void;
@@ -118,6 +119,8 @@ const FootprintDrawer = ({ handleSave }: Props) => {
   const handleClickSaveButton = () => {
     if (title) {
       handleSave(title, content);
+    } else {
+      showToast({ message: "제목을 입력해주세요.", type: "error" });
     }
   };
   return (
