@@ -113,6 +113,7 @@ const FootprintDrawer = ({ handleSave }: Props) => {
   const [drawerState, setDrawerState] = useAtom(isDrawerOpenAtom);
 
   const [title, setTitle] = useState("00-00의 발도장");
+  const [content, setContent] = useState("");
 
   const handleClickSaveButton = () => {
     if (title) {
@@ -161,7 +162,11 @@ const FootprintDrawer = ({ handleSave }: Props) => {
                 />
                 <PenIcon fill="#999" />
               </label>
-              <textarea className={contentStyles} />
+              <textarea
+                className={contentStyles}
+                value={content}
+                onChange={(e) => setContent(e.target.value)}
+              />
             </div>
           </div>
           <button
