@@ -26,8 +26,8 @@ const useMap = ({ location, footprints }: Props) => {
     polylineRef.current = new naver.maps.Polyline({
       map: mapRef.current,
       path: [],
-      strokeColor: "#5347AA",
-      strokeWeight: 5,
+      strokeColor: "#7A8F87",
+      strokeWeight: 10,
     });
 
     curPosMarkerRef.current = new naver.maps.Marker({

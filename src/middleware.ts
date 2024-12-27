@@ -6,9 +6,10 @@ import { auth } from "./auth";
 const withAuthRoutes = [
   "/mypage",
   "/friends",
-  "/setting",
+  // TODO: 인증 관련 block 나중에 풀기
+  // "/setting",
   // "/tracking",
-  "/review",
+  // "/review",
 ];
 
 const withOutAuthRoutes = ["/login", "/id-login"];
