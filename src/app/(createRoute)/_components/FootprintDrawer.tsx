@@ -7,10 +7,10 @@ import { hstack, vstack } from "../../../../styled-system/patterns";
 import { isDrawerOpenAtom } from "@/app/_atoms";
 import Button from "@/app/_components/Button";
 import Typography from "@/app/_components/Typography";
+import { showToast } from "@/app/_lib/toast";
 import CameraIcon from "@/assets/icons/CameraIcon";
 import CloseIcon from "@/assets/icons/CloseIcon";
 import PenIcon from "@/assets/icons/PenIcon";
-import { showToast } from "@/app/_lib/toast";
 
 interface Props {
   handleSave: (title: string, content: string) => void;
