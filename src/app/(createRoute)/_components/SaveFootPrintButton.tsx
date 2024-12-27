@@ -1,31 +1,40 @@
-import { css } from "../../../../styled-system/css";
+import { useSetAtom } from "jotai";
 
-import Button from "@/app/_components/Button";
+import { hstack } from "../../../../styled-system/patterns";
 
-interface Props {
-  handleSave: (title: string) => void;
-}
+import { isDrawerOpenAtom } from "@/app/_atoms";
+import FootIcon from "@/assets/icons/FootIcon";
 
-const saveFootPrintButton = css({
+const saveButtonStyles = hstack({
+  width: "64px",
+  height: "64px",
+  bgColor: "oddu_green01",
+  color: "oddu_white01",
+  alignItems: "center",
+  justifyContent: "center",
+  zIndex: 1000,
+  borderRadius: "10px",
+  cursor: "pointer",
   position: "absolute",
   right: "20px",
-  bottom: "106px",
+  bottom: "120px",
 });
 
-const SaveFootPrintButton = ({ handleSave }: Props) => {
-  const handleClickSaveButton = async () => {
-    const title = prompt("발도장의 제목을 지어주세요");
-    if (title) {
-      handleSave(title);
-    }
+const SaveFootPrintButton = () => {
+  const setDrawerStatus = useSetAtom(isDrawerOpenAtom);
+
+  const handleClickOpenDrawer = async () => {
+    setDrawerStatus(true);
   };
 
   return (
-    <div className={saveFootPrintButton}>
-      <Button color="oddu_black03" handleClick={handleClickSaveButton}>
-        발자국 찍기
-      </Button>
-    </div>
+    <button
+      type="button"
+      className={saveButtonStyles}
+      onClick={handleClickOpenDrawer}
+    >
+      <FootIcon size="42.67" />
+    </button>
   );
 };
 

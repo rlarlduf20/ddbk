@@ -2,6 +2,7 @@ import Script from "next/script";
 import { useEffect, useState } from "react";
 
 import CurLocationButton from "./CurLocationButton";
+import FootprintDrawer from "./FootprintDrawer";
 import SaveFootPrintButton from "./SaveFootPrintButton";
 import TrackingControlButton from "./TrackingControlButton";
 import { startTracking, stopTracking } from "../_lib/tracking";
@@ -17,6 +18,7 @@ import { FootprintType } from "@/app/_types/footprint";
 const MapContainer = () => {
   const { isLoading, location } = useGeoLocation();
   const { push } = useRouterEvent();
+
   const [footprints, setFootprints] = useState<FootprintType[]>([]);
   const { handleScriptLoad, disableAutoMove, moveToCurLocation } = useMap({
     location,
@@ -59,19 +61,18 @@ const MapContainer = () => {
         />
       </div>
       <TrackingControlButton handleClickFinishBtn={handleClickFinishBtn} />
-      <SaveFootPrintButton
-        handleSave={(title: string) =>
+      <SaveFootPrintButton />
+      <CurLocationButton moveCurLocation={moveToCurLocation} />
+      <FootprintDrawer
+        handleSave={(title: string, content: string) =>
           handleSaveFootprints({
             title,
             latitude: location.latitude,
             longitude: location.longitude,
-            content: "테스트",
+            content,
           })
         }
       />
-      <div>
-        <CurLocationButton moveCurLocation={moveToCurLocation} />
-      </div>
     </>
   );
 };

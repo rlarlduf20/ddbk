@@ -20,7 +20,7 @@ const workButtonStyles = hstack({
   color: "oddu_white01",
   alignItems: "center",
   justifyContent: "center",
-  zIndex: 1000,
+  zIndex: 100,
   borderRadius: "50%",
   cursor: "pointer",
 });
