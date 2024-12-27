@@ -22,7 +22,7 @@ const Review = () => {
   };
   return (
     <>
-      <AppBar>산책 종료</AppBar>
+      <AppBar isBackPossible={false}>산책 종료</AppBar>
       <div className={buttonBoxStyles}>
         <Button
           size="large"
