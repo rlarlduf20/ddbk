@@ -119,6 +119,9 @@ const FootprintDrawer = ({ handleSave }: Props) => {
   const handleClickSaveButton = () => {
     if (title) {
       handleSave(title, content);
+      setDrawerState(false);
+      setTitle("00-00의 발도장");
+      setContent("");
     } else {
       showToast({ message: "제목을 입력해주세요.", type: "error" });
     }
