@@ -59,6 +59,7 @@ const ProfileCard = async () => {
     return (
       <div className={profileCardStyles}>
         <Link href="/login">로그인</Link>
+        <SettingButton />
       </div>
     );
   }

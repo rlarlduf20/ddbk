@@ -3,13 +3,7 @@ import type { NextRequest } from "next/server";
 
 import { auth } from "./auth";
 
-const withAuthRoutes = [
-  "/mypage",
-  "/friends",
-  "/setting",
-  "/tracking",
-  "/review",
-];
+const withAuthRoutes = ["/mypage", "/friends", "/tracking", "/review"];
 
 const withOutAuthRoutes = ["/login", "/id-login"];
 
