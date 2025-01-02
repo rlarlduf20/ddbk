@@ -31,7 +31,7 @@ const ProfileCard = async () => {
   if (!session) {
     return (
       <div className={profileCardStyles}>
-        <Link href="/login">로그인</Link>
+        <Typography.H3>로그인이 필요합니다.</Typography.H3>
       </div>
     );
   }

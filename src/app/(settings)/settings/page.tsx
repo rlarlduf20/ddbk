@@ -4,10 +4,10 @@ import ProfileCard from "../_components/Profile";
 import SignOutButton from "../_components/SignOutButtont";
 
 import AppBar from "@/app/_components/AppBar";
+import { auth } from "@/auth";
 
 const settingStyles = css({
   width: "100vw",
-  // px: "20px",
 });
 
 const settingSectionStyles = css({
@@ -18,13 +18,15 @@ const settingSectionStyles = css({
 });
 
 const SettingPage = async () => {
+  const session = await auth();
+
   return (
     <div className={settingStyles}>
       <AppBar>설정</AppBar>
       <section className={settingSectionStyles}>
         <ProfileCard />
         <GPSGroup />
-        <SignOutButton />
+        {session && <SignOutButton />}
       </section>
     </div>
   );
